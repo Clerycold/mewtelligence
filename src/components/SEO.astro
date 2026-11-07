@@ -13,7 +13,7 @@ export interface SEOProps {
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const SITE_NAME = 'Mewtelligence';
+import { SITE_NAME } from '../lib/site';
 const { title, description, type = 'website', image, noindex = false, publishedTime, modifiedTime, jsonLd } =
   Astro.props as SEOProps;
 

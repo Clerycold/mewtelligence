@@ -1,0 +1,69 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { CONTACT_EMAIL, SITE_NAME } from '../lib/site';
+
+// 修改政策內容時，記得更新這個日期
+const UPDATED = new Date('2026-11-07');
+---
+<PageLayout
+  title="隱私權政策"
+  description={`${SITE_NAME} 如何處理你的瀏覽資料、Cookie 與聯盟行銷連結的說明。`}
+  updated={UPDATED}
+>
+  <p>
+    {SITE_NAME}（以下稱「本站」）重視你的隱私。本政策說明你瀏覽本站時，哪些資料會被收集、由誰收集、用在哪裡。
+    本站依中華民國《個人資料保護法》處理相關事項。
+  </p>
+
+  <h2>一、本站不會主動收集的資料</h2>
+  <p>
+    本站沒有會員系統、留言或表單，<strong>不會要求你提供姓名、電話、地址或付款資料</strong>，
+    本站本身也不設定任何追蹤用 Cookie。
+  </p>
+
+  <h2>二、第三方服務會處理的資料</h2>
+  <p>為了讓網站正常運作，本站使用以下第三方服務，它們可能依各自的政策處理你的部分技術資料：</p>
+  <ul>
+    <li>
+      <strong>Cloudflare（網站主機與內容傳遞）</strong>：為了提供網頁、防止攻擊，Cloudflare 會處理你的 IP 位址、瀏覽器類型、
+      造訪時間等連線資料。詳見 <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener" target="_blank">Cloudflare 隱私權政策</a>。
+    </li>
+    <li>
+      <strong>Google Fonts（網頁字型）</strong>：載入字型時，你的瀏覽器會連線到 Google 伺服器，Google 因此會取得你的 IP 位址。
+      詳見 <a href="https://policies.google.com/privacy?hl=zh-TW" rel="noopener" target="_blank">Google 隱私權政策</a>。
+    </li>
+  </ul>
+
+  <h2>三、聯盟行銷連結與 Cookie</h2>
+  <p>
+    本站的「查看價格」「到商店看價格」等按鈕為聯盟行銷連結，網址開頭為 <code>/go/</code>。點擊後會轉到外部商店
+    （例如蝦皮購物、momo 購物網或其他電商平台）。
+  </p>
+  <ul>
+    <li>轉址時，本站不會記錄你的個人資料。</li>
+    <li>
+      到達商店網站後，商店或聯盟行銷平台可能在你的瀏覽器設定 Cookie，用來辨識這筆訂單是由本站推薦，
+      以便計算分潤。這些 Cookie 由該商店或平台設定與管理，適用它們的隱私權政策。
+    </li>
+    <li>本站只會從平台取得彙總的成效資料（例如點擊數、成交金額），無法得知購買者的身分。</li>
+  </ul>
+
+  <h2>四、如何管理 Cookie</h2>
+  <p>
+    你可以在瀏覽器設定中封鎖或刪除 Cookie。封鎖第三方 Cookie 不會影響你瀏覽本站，
+    但可能讓商店網站的部分功能（例如購物車）無法正常使用。
+  </p>
+
+  <h2>五、外部連結</h2>
+  <p>本站內容包含其他網站的連結。外部網站的隱私權保護，適用該網站自己的政策，不在本政策範圍內。</p>
+
+  <h2>六、政策修訂</h2>
+  <p>本站可能因服務調整或法規變更修改本政策，修改後會更新本頁上方的「最後更新」日期。</p>
+
+  {CONTACT_EMAIL && (
+    <>
+      <h2>七、聯絡方式</h2>
+      <p>對本政策有任何疑問，請來信：<a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
+    </>
+  )}
+</PageLayout>

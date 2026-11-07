@@ -1,0 +1,48 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { CONTACT_EMAIL, SITE_NAME } from '../lib/site';
+import { categories } from '../lib/data';
+---
+<PageLayout
+  title="關於我們"
+  description={`${SITE_NAME} 是給貓奴的日常好物指南，整理貓飼料、貓砂、玩具與貓家具的規格比較與選購建議。`}
+>
+  <p>
+    {SITE_NAME} 的名字來自貓叫聲「Mew」和「Intelligence」。我們想做的事很簡單：
+    把挑選貓咪用品時需要的資訊整理清楚，讓你少花時間比價、少踩雷，把心力留給陪伴貓咪。
+  </p>
+
+  <h2>我們寫什麼</h2>
+  <p>目前內容涵蓋以下分類：</p>
+  <ul>
+    {categories.map((c) => <li><a href={`/category/${c.slug}/`}>{c.name}</a>：{c.description}</li>)}
+  </ul>
+
+  <h2>我們怎麼挑選與比較</h2>
+  <ul>
+    <li><strong>看規格，也看缺點</strong>：每個商品都會同時列出優點與缺點，沒有完美的商品，只有適不適合你家的貓。</li>
+    <li><strong>用同一套標準比較</strong>：同一分類的商品用相同欄位並排比較，例如貓砂一律比較凝結力、粉塵量與能否沖馬桶。</li>
+    <li><strong>定期更新</strong>：價格與商品資訊會變動，文章會標示最後更新日期，實際價格請以商店頁面為準。</li>
+    <li><strong>不取代獸醫建議</strong>：涉及健康、飲食調整的內容僅供參考，貓咪有特殊狀況請先諮詢獸醫。</li>
+  </ul>
+
+  <h2>我們怎麼維持營運</h2>
+  <p>
+    本站部分商品連結為聯盟行銷連結。當你透過這些連結購買商品，{SITE_NAME} 可能從商店獲得一小部分分潤，
+    <strong>你支付的價格不會因此增加</strong>。
+  </p>
+  <p>
+    分潤不會影響我們的評價：商品的排序、推薦標示與優缺點，都依照比較結果撰寫，不接受付費調整排名。
+    含聯盟連結的頁面，都會在頁面上方或下方標示說明。
+  </p>
+
+  {CONTACT_EMAIL && (
+    <>
+      <h2>聯絡我們</h2>
+      <p>
+        對內容有建議、發現資訊錯誤，或有合作需求，歡迎來信：
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      </p>
+    </>
+  )}
+</PageLayout>
