@@ -5,6 +5,8 @@
  * 這個頁面是備援：本機 dev / preview 或 _redirects 沒生效時，用 meta refresh + JS 跳轉。
  */
 import { products, type Product } from '../../lib/data';
+import { outboundUrl } from '../../lib/outbound.mjs';
+import affiliateConfig from '../../data/affiliate.json';
 
 export function getStaticPaths() {
   return products.map((product) => ({ params: { id: product.id }, props: { product } }));
@@ -12,7 +14,7 @@ export function getStaticPaths() {
 
 interface Props { product: Product }
 const { product } = Astro.props;
-const target = product.affiliateUrl;
+const target = outboundUrl(product, affiliateConfig);
 ---
 <!doctype html>
 <html lang="zh-Hant-TW">

@@ -21,7 +21,10 @@ export interface Product {
   pros: string[];
   cons: string[];
   merchant: string;
+  /** 一般商店網址（要導去的頁面） */
   affiliateUrl: string;
+  /** 經過哪個聯盟平台轉址；不填則直接連到商店（見 src/lib/outbound.mjs） */
+  network?: 'ichannels';
   /** hands-on = 自家貓實際用過；research = 依官方規格與公開資料整理 */
   reviewType: 'hands-on' | 'research';
   /** 實際使用心得（hands-on 才填），例如「三隻貓輪流用了半年」 */

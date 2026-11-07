@@ -23,7 +23,8 @@
     ],
     "merchant": "momo",
     "affiliateUrl": "https://www.momoshop.com.tw/search/searchShop.jsp?keyword=%E7%84%A1%E7%A9%80%20%E9%AE%AD%E9%AD%9A%20%E8%B2%93%E9%A3%BC%E6%96%99",
-    "reviewType": "research"
+    "reviewType": "research",
+    "network": "ichannels"
   },
   {
     "id": "food-chicken-daily",
@@ -129,7 +130,8 @@
     ],
     "merchant": "momo",
     "affiliateUrl": "https://www.momoshop.com.tw/search/searchShop.jsp?keyword=%E7%A4%A6%E7%A0%82%20%E8%B2%93%E7%A0%82",
-    "reviewType": "research"
+    "reviewType": "research",
+    "network": "ichannels"
   },
   {
     "id": "litter-mix-charcoal",
@@ -233,7 +235,8 @@
     ],
     "merchant": "momo",
     "affiliateUrl": "https://www.momoshop.com.tw/search/searchShop.jsp?keyword=%E8%B2%93%20%E7%9B%8A%E6%99%BA%20%E6%85%A2%E9%A3%9F",
-    "reviewType": "research"
+    "reviewType": "research",
+    "network": "ichannels"
   },
   {
     "id": "furniture-tower-xl",

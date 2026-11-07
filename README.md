@@ -50,6 +50,7 @@ npm run deploy   # build 並部署到 Cloudflare Pages（需先 wrangler login�
 
 | 欄位 | 說明 |
 |---|---|
+| `network` | 填 `"ichannels"` 會自動轉成通路王深層連結（K 值在 `src/data/affiliate.json`）；不填則直接連到商店。⚠️ 蝦皮經通路王會被導回首頁，目前只對 momo 啟用 |
 | `reviewType` | `"hands-on"`＝自家貓實際用過；`"research"`＝依官方規格整理（必填，請誠實標示） |
 | `usageNote` | 實際使用心得，例如「三隻貓輪流用了半年，老大最愛」（hands-on 才填） |
 | `priceCheckedAt` | 價格查核日期，例如 `"2026-11-07"` |
