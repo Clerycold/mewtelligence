@@ -12,6 +12,10 @@ const articles = defineCollection({
     updatedDate: z.coerce.date().optional(),
     // 文章底部比較表要放哪些商品（對應 products.json 的 id）
     products: z.array(z.string()).default([]),
+    // 作者 id（對應 authors.json）
+    author: z.string().default('tenyear'),
+    // 參考資料：引用的獸醫、學術、官方資料
+    sources: z.array(z.object({ title: z.string(), url: z.string().url() })).default([]),
     draft: z.boolean().default(false),
   }),
 });

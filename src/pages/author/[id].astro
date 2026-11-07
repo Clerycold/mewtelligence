@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { type Author, authorAvatar, authors } from '../../lib/data';
+import { getPublishedArticles } from '../../lib/articles';
+
+export function getStaticPaths() {
+  return authors.map((author) => ({ params: { id: author.id }, props: { author } }));
+}
+
+interface Props { author: Author }
+const { author } = Astro.props;
+const articles = (await getPublishedArticles()).filter((a) => a.data.author === author.id);
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+
+const jsonLd = {
+  '@type': 'ProfilePage',
+  mainEntity: {
+    '@type': 'Person',
+    name: author.name,
+    jobTitle: author.role,
+    description: author.bio,
+    url: pageUrl,
+  },
+};
+---
+<BaseLayout title={`${author.name}｜作者介紹`} description={author.bio} jsonLd={jsonLd}>
+  <div class="container page">
+    <nav class="crumbs" aria-label="麵包屑"><a href="/">首頁</a> › 作者 › {author.name}</nav>
+    <header class="profile">
+      <img class="profile__avatar" src={authorAvatar(author)} alt={author.avatar ? author.name : ''} width="112" height="112" />
+      <div>
+        <h1>{author.name}</h1>
+        <p class="profile__role">{author.role}</p>
+        <ul class="profile__facts">{author.facts.map((f) => <li>{f}</li>)}</ul>
+      </div>
+    </header>
+    <p class="profile__bio">{author.bio}</p>
+    <p class="profile__more">想知道我們怎麼挑選和比較商品？請看<a href="/how-we-review/">我們的評測方式</a>。</p>
+
+    <section aria-labelledby="by-heading">
+      <h2 id="by-heading">{author.name}的文章（{articles.length}）</h2>
+      <div class="grid">{articles.map((a) => <ArticleCard article={a} />)}</div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page { padding-top: 28px; }
+  .crumbs { font-size: 0.85rem; color: var(--cd-text-muted); margin-bottom: 16px; }
+  .profile { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .profile h1 { margin: 0; }
+  .profile__avatar { border-radius: 50%; background: var(--cd-primary-soft); padding: 10px; object-fit: cover; }
+  .profile__role { margin: 0; color: var(--cd-text-muted); }
+  .profile__facts { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 8px 0 0; }
+  .profile__facts li {
+    font-size: 0.82rem; padding: 0.1em 0.8em; border-radius: 999px;
+    background: var(--cd-primary-soft); color: var(--cd-primary-dark); font-weight: 700;
+  }
+  .profile__bio { max-width: 40em; font-size: 1.05rem; margin-top: 20px; }
+  .profile__more { color: var(--cd-text-muted); }
+</style>

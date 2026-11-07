@@ -46,6 +46,17 @@ npm run deploy   # build 並部署到 Cloudflare Pages（需先 wrangler login�
 }
 ```
 
+可信度相關欄位：
+
+| 欄位 | 說明 |
+|---|---|
+| `reviewType` | `"hands-on"`＝自家貓實際用過；`"research"`＝依官方規格整理（必填，請誠實標示） |
+| `usageNote` | 實際使用心得，例如「三隻貓輪流用了半年，老大最愛」（hands-on 才填） |
+| `priceCheckedAt` | 價格查核日期，例如 `"2026-11-07"` |
+| `photo` | 自己拍的照片，放 `public/images/`，填 `"/images/檔名.jpg"` |
+
+作者資料在 `src/data/authors.json`；頭像放 `public/images/` 後把 `avatar` 改成 `"/images/檔名.jpg"`。
+
 站內所有購買按鈕都連到 `/go/{id}/`，不直接寫聯盟網址。之後換平台只要改 JSON 一處。
 
 ## 新增文章
@@ -59,6 +70,10 @@ description: 120 字內的摘要（會用在 Google 搜尋結果）
 category: litter          # food / litter / toys / furniture
 pubDate: 2026-11-07
 products: [litter-tofu-original, litter-new-one]   # 文末比較表
+author: tenyear           # 對應 authors.json，可省略（預設 tenyear）
+sources:                  # 參考資料，可省略
+  - title: 資料標題
+    url: https://...
 draft: false
 ---
 ```

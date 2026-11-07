@@ -7,11 +7,23 @@
     "price": 1280,
     "rating": 4.6,
     "summary": "高蛋白、無穀配方，適合腸胃敏感的成貓。",
-    "specs": { "protein": "38%", "grainFree": "是", "weight": "2 kg", "origin": "加拿大" },
-    "pros": ["蛋白質含量高", "顆粒小好咀嚼", "適口性佳"],
-    "cons": ["價格偏高"],
+    "specs": {
+      "protein": "38%",
+      "grainFree": "是",
+      "weight": "2 kg",
+      "origin": "加拿大"
+    },
+    "pros": [
+      "蛋白質含量高",
+      "顆粒小好咀嚼",
+      "適口性佳"
+    ],
+    "cons": [
+      "價格偏高"
+    ],
     "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/food-salmon-gf"
+    "affiliateUrl": "https://example.com/products/food-salmon-gf",
+    "reviewType": "research"
   },
   {
     "id": "food-chicken-daily",
@@ -21,11 +33,23 @@
     "price": 690,
     "rating": 4.2,
     "summary": "平價日常主食，全齡貓都能吃。",
-    "specs": { "protein": "32%", "grainFree": "否", "weight": "2 kg", "origin": "台灣" },
-    "pros": ["價格親民", "通路好買"],
-    "cons": ["含穀物", "蛋白質較低"],
+    "specs": {
+      "protein": "32%",
+      "grainFree": "否",
+      "weight": "2 kg",
+      "origin": "台灣"
+    },
+    "pros": [
+      "價格親民",
+      "通路好買"
+    ],
+    "cons": [
+      "含穀物",
+      "蛋白質較低"
+    ],
     "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/food-chicken-daily"
+    "affiliateUrl": "https://example.com/products/food-chicken-daily",
+    "reviewType": "research"
   },
   {
     "id": "food-tuna-can",
@@ -35,11 +59,23 @@
     "price": 1560,
     "rating": 4.5,
     "summary": "含水量高的主食罐，幫助不愛喝水的貓補充水分。",
-    "specs": { "protein": "12%（濕重）", "grainFree": "是", "weight": "80 g × 24", "origin": "泰國" },
-    "pros": ["補水效果好", "完整營養可當主食"],
-    "cons": ["開罐後需冷藏", "單價較高"],
+    "specs": {
+      "protein": "12%（濕重）",
+      "grainFree": "是",
+      "weight": "80 g × 24",
+      "origin": "泰國"
+    },
+    "pros": [
+      "補水效果好",
+      "完整營養可當主食"
+    ],
+    "cons": [
+      "開罐後需冷藏",
+      "單價較高"
+    ],
     "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/food-tuna-can"
+    "affiliateUrl": "https://example.com/products/food-tuna-can",
+    "reviewType": "research"
   },
   {
     "id": "litter-tofu-original",
@@ -49,11 +85,24 @@
     "price": 299,
     "rating": 4.4,
     "summary": "天然豆渣製成，可直接沖馬桶，粉塵少。",
-    "specs": { "material": "豆腐", "clumping": "★★★★☆", "dust": "低", "flushable": "是" },
-    "pros": ["可沖馬桶", "粉塵少", "重量輕"],
-    "cons": ["受潮易發霉", "除臭力普通"],
+    "specs": {
+      "material": "豆腐",
+      "clumping": "★★★★☆",
+      "dust": "低",
+      "flushable": "是"
+    },
+    "pros": [
+      "可沖馬桶",
+      "粉塵少",
+      "重量輕"
+    ],
+    "cons": [
+      "受潮易發霉",
+      "除臭力普通"
+    ],
     "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/litter-tofu-original"
+    "affiliateUrl": "https://example.com/products/litter-tofu-original",
+    "reviewType": "research"
   },
   {
     "id": "litter-bentonite-pro",
@@ -63,11 +112,24 @@
     "price": 450,
     "rating": 4.1,
     "summary": "膨潤土礦砂，結團快又硬，鏟起來不散。",
-    "specs": { "material": "膨潤土礦砂", "clumping": "★★★★★", "dust": "中", "flushable": "否" },
-    "pros": ["凝結力最強", "貓咪接受度高"],
-    "cons": ["很重", "有粉塵", "不能沖馬桶"],
+    "specs": {
+      "material": "膨潤土礦砂",
+      "clumping": "★★★★★",
+      "dust": "中",
+      "flushable": "否"
+    },
+    "pros": [
+      "凝結力最強",
+      "貓咪接受度高"
+    ],
+    "cons": [
+      "很重",
+      "有粉塵",
+      "不能沖馬桶"
+    ],
     "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/litter-bentonite-pro"
+    "affiliateUrl": "https://example.com/products/litter-bentonite-pro",
+    "reviewType": "research"
   },
   {
     "id": "litter-mix-charcoal",
@@ -77,11 +139,22 @@
     "price": 360,
     "rating": 4.3,
     "summary": "豆腐砂混合礦砂與活性碳，兼顧凝結與除臭。",
-    "specs": { "material": "豆腐＋礦砂＋活性碳", "clumping": "★★★★☆", "dust": "低", "flushable": "部分" },
-    "pros": ["除臭力佳", "凝結力穩定"],
-    "cons": ["顏色深不易觀察尿色"],
+    "specs": {
+      "material": "豆腐＋礦砂＋活性碳",
+      "clumping": "★★★★☆",
+      "dust": "低",
+      "flushable": "部分"
+    },
+    "pros": [
+      "除臭力佳",
+      "凝結力穩定"
+    ],
+    "cons": [
+      "顏色深不易觀察尿色"
+    ],
     "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/litter-mix-charcoal"
+    "affiliateUrl": "https://example.com/products/litter-mix-charcoal",
+    "reviewType": "research"
   },
   {
     "id": "toy-feather-wand",
@@ -91,11 +164,24 @@
     "price": 199,
     "rating": 4.7,
     "summary": "三段伸縮桿＋可替換羽毛頭，最基本也最有效的互動玩具。",
-    "specs": { "type": "逗貓棒", "power": "不需要", "material": "碳纖維桿、天然羽毛", "soloPlay": "否" },
-    "pros": ["便宜", "貓咪最愛", "增進互動"],
-    "cons": ["需要人陪玩", "羽毛消耗快"],
+    "specs": {
+      "type": "逗貓棒",
+      "power": "不需要",
+      "material": "碳纖維桿、天然羽毛",
+      "soloPlay": "否"
+    },
+    "pros": [
+      "便宜",
+      "貓咪最愛",
+      "增進互動"
+    ],
+    "cons": [
+      "需要人陪玩",
+      "羽毛消耗快"
+    ],
     "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/toy-feather-wand"
+    "affiliateUrl": "https://example.com/products/toy-feather-wand",
+    "reviewType": "research"
   },
   {
     "id": "toy-auto-laser",
@@ -105,11 +191,23 @@
     "price": 890,
     "rating": 3.9,
     "summary": "定時自動投射雷射點，主人不在家也能玩。",
-    "specs": { "type": "電動玩具", "power": "USB 充電", "material": "ABS 塑膠", "soloPlay": "是" },
-    "pros": ["可定時", "不用人陪"],
-    "cons": ["抓不到實體易挫折", "需注意別照到眼睛"],
+    "specs": {
+      "type": "電動玩具",
+      "power": "USB 充電",
+      "material": "ABS 塑膠",
+      "soloPlay": "是"
+    },
+    "pros": [
+      "可定時",
+      "不用人陪"
+    ],
+    "cons": [
+      "抓不到實體易挫折",
+      "需注意別照到眼睛"
+    ],
     "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/toy-auto-laser"
+    "affiliateUrl": "https://example.com/products/toy-auto-laser",
+    "reviewType": "research"
   },
   {
     "id": "toy-puzzle-feeder",
@@ -119,11 +217,23 @@
     "price": 520,
     "rating": 4.4,
     "summary": "把乾糧藏在轉盤裡，讓貓動腦找食物，也能減緩吃太快。",
-    "specs": { "type": "益智餵食器", "power": "不需要", "material": "食品級 PP", "soloPlay": "是" },
-    "pros": ["防止狼吞虎嚥", "消耗精力"],
-    "cons": ["需要教學期", "清洗較麻煩"],
+    "specs": {
+      "type": "益智餵食器",
+      "power": "不需要",
+      "material": "食品級 PP",
+      "soloPlay": "是"
+    },
+    "pros": [
+      "防止狼吞虎嚥",
+      "消耗精力"
+    ],
+    "cons": [
+      "需要教學期",
+      "清洗較麻煩"
+    ],
     "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/toy-puzzle-feeder"
+    "affiliateUrl": "https://example.com/products/toy-puzzle-feeder",
+    "reviewType": "research"
   },
   {
     "id": "furniture-tower-xl",
@@ -133,11 +243,23 @@
     "price": 3980,
     "rating": 4.6,
     "summary": "實木結構＋劍麻柱，多貓家庭也穩固。",
-    "specs": { "size": "60 × 50 × 160 cm", "material": "實木、劍麻", "maxLoad": "25 kg", "assembly": "中等" },
-    "pros": ["非常穩固", "多層活動空間"],
-    "cons": ["佔空間", "價格高"],
+    "specs": {
+      "size": "60 × 50 × 160 cm",
+      "material": "實木、劍麻",
+      "maxLoad": "25 kg",
+      "assembly": "中等"
+    },
+    "pros": [
+      "非常穩固",
+      "多層活動空間"
+    ],
+    "cons": [
+      "佔空間",
+      "價格高"
+    ],
     "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/furniture-tower-xl"
+    "affiliateUrl": "https://example.com/products/furniture-tower-xl",
+    "reviewType": "research"
   },
   {
     "id": "furniture-scratcher-wave",
@@ -147,11 +269,23 @@
     "price": 350,
     "rating": 4.5,
     "summary": "高密度瓦楞紙，抓、躺、靠都可以。",
-    "specs": { "size": "48 × 24 × 15 cm", "material": "高密度瓦楞紙", "maxLoad": "8 kg", "assembly": "免組裝" },
-    "pros": ["便宜好替換", "保護沙發"],
-    "cons": ["紙屑較多", "需定期更換"],
+    "specs": {
+      "size": "48 × 24 × 15 cm",
+      "material": "高密度瓦楞紙",
+      "maxLoad": "8 kg",
+      "assembly": "免組裝"
+    },
+    "pros": [
+      "便宜好替換",
+      "保護沙發"
+    ],
+    "cons": [
+      "紙屑較多",
+      "需定期更換"
+    ],
     "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/furniture-scratcher-wave"
+    "affiliateUrl": "https://example.com/products/furniture-scratcher-wave",
+    "reviewType": "research"
   },
   {
     "id": "furniture-window-bed",
@@ -161,10 +295,22 @@
     "price": 780,
     "rating": 4.2,
     "summary": "吸附在窗戶上的曬太陽專區，不佔地板空間。",
-    "specs": { "size": "55 × 35 cm", "material": "強化吸盤、帆布", "maxLoad": "15 kg", "assembly": "簡單" },
-    "pros": ["不佔空間", "貓咪愛看窗外"],
-    "cons": ["需光滑玻璃", "吸盤需定期檢查"],
+    "specs": {
+      "size": "55 × 35 cm",
+      "material": "強化吸盤、帆布",
+      "maxLoad": "15 kg",
+      "assembly": "簡單"
+    },
+    "pros": [
+      "不佔空間",
+      "貓咪愛看窗外"
+    ],
+    "cons": [
+      "需光滑玻璃",
+      "吸盤需定期檢查"
+    ],
     "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/furniture-window-bed"
+    "affiliateUrl": "https://example.com/products/furniture-window-bed",
+    "reviewType": "research"
   }
 ]

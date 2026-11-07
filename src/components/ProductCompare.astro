@@ -5,7 +5,8 @@
  *   或：<ProductCompare products={productArray} />
  */
 import Rating from './Rating.astro';
-import { type Product, categories, formatPrice, getProductsByIds, goUrl } from '../lib/data';
+import ReviewBadge from './ReviewBadge.astro';
+import { type Product, categories, formatDate, formatPrice, getProductsByIds, goUrl } from '../lib/data';
 
 interface Props {
   ids?: string[];
@@ -32,6 +33,7 @@ const badgesFor = (p: Product) => [
   p === topRated && { text: '編輯推薦', cls: 'top' },
   p === cheapest && { text: '最划算', cls: 'value' },
 ].filter(Boolean) as { text: string; cls: string }[];
+const hasUsage = items.some((p) => p.usageNote);
 ---
 {items.length > 0 && (
   <section class="compare" aria-label={title}>
@@ -46,8 +48,10 @@ const badgesFor = (p: Product) => [
                 <div class="compare__badges">
                   {badgesFor(p).map((b) => <span class={`badge badge--${b.cls}`}>{b.text}</span>)}
                 </div>
+                {p.photo && <img class="compare__photo" src={p.photo} alt={p.name} loading="lazy" />}
                 <span class="compare__brand">{p.brand}</span>
                 <span class="compare__name">{p.name}</span>
+                <ReviewBadge type={p.reviewType} />
               </th>
             ))}
           </tr>
@@ -55,7 +59,12 @@ const badgesFor = (p: Product) => [
         <tbody>
           <tr>
             <th scope="row" class="compare__label">參考價格</th>
-            {items.map((p) => <td class="compare__price">{formatPrice(p.price)}</td>)}
+            {items.map((p) => (
+              <td class="compare__price">
+                {formatPrice(p.price)}
+                {p.priceCheckedAt && <small>查於 {formatDate(p.priceCheckedAt)}</small>}
+              </td>
+            ))}
           </tr>
           <tr>
             <th scope="row" class="compare__label">評分</th>
@@ -67,6 +76,12 @@ const badgesFor = (p: Product) => [
               {items.map((p) => <td>{p.specs[key] ?? '—'}</td>)}
             </tr>
           ))}
+          {hasUsage && (
+            <tr>
+              <th scope="row" class="compare__label">使用心得</th>
+              {items.map((p) => <td class="compare__usage">{p.usageNote ?? '—'}</td>)}
+            </tr>
+          )}
           <tr>
             <th scope="row" class="compare__label">優點</th>
             {items.map((p) => (
@@ -124,7 +139,10 @@ const badgesFor = (p: Product) => [
   .badge--top { background: var(--cd-primary); }
   .badge--value { background: var(--cd-accent); }
   .compare__brand { display: block; font-size: 0.78rem; color: var(--cd-text-muted); font-weight: 400; }
-  .compare__name { display: block; font-family: var(--cd-font-display); font-size: 1rem; }
+  .compare__name { display: block; font-family: var(--cd-font-display); font-size: 1rem; margin-bottom: 4px; }
+  .compare__photo { display: block; width: 100%; max-width: 160px; aspect-ratio: 1; object-fit: cover; border-radius: var(--cd-radius-sm); margin-bottom: 8px; }
+  .compare__price small { display: block; font-size: 0.72rem; font-weight: 400; color: var(--cd-text-muted); }
+  .compare__usage { font-size: 0.88rem; }
   .compare__price { font-weight: 700; color: var(--cd-primary-dark); font-size: 1.05rem; }
   .list { margin: 0; padding: 0; list-style: none; }
   .list li { padding-left: 1.3em; position: relative; }

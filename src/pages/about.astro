@@ -1,7 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { CONTACT_EMAIL, SITE_NAME } from '../lib/site';
-import { categories } from '../lib/data';
+import { authors, categories } from '../lib/data';
 ---
 <PageLayout
   title="關於我們"
@@ -12,6 +12,13 @@ import { categories } from '../lib/data';
     把挑選貓咪用品時需要的資訊整理清楚，讓你少花時間比價、少踩雷，把心力留給陪伴貓咪。
   </p>
 
+  <h2>誰在寫</h2>
+  {authors.map((a) => (
+    <p>
+      <a href={`/author/${a.id}/`}><strong>{a.name}</strong></a>（{a.facts.join('、')}）：{a.bio}
+    </p>
+  ))}
+
   <h2>我們寫什麼</h2>
   <p>目前內容涵蓋以下分類：</p>
   <ul>
@@ -19,6 +26,7 @@ import { categories } from '../lib/data';
   </ul>
 
   <h2>我們怎麼挑選與比較</h2>
+  <p>完整說明請看<a href="/how-we-review/">我們的評測方式</a>，重點如下：</p>
   <ul>
     <li><strong>看規格，也看缺點</strong>：每個商品都會同時列出優點與缺點，沒有完美的商品，只有適不適合你家的貓。</li>
     <li><strong>用同一套標準比較</strong>：同一分類的商品用相同欄位並排比較，例如貓砂一律比較凝結力、粉塵量與能否沖馬桶。</li>

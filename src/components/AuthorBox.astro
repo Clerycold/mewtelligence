@@ -1,0 +1,58 @@
+---
+import { type Author, authorAvatar } from '../lib/data';
+
+interface Props { author: Author }
+const { author } = Astro.props;
+---
+<aside class="card author-box" aria-label="關於作者">
+  <img class="author-box__avatar" src={authorAvatar(author)} alt={author.avatar ? author.name : ''} width="72" height="72" />
+  <div>
+    <p class="author-box__label">關於作者</p>
+    <p class="author-box__name">
+      <a href={`/author/${author.id}/`}>{author.name}</a>
+      <span>{author.role}</span>
+    </p>
+    <ul class="author-box__facts">
+      {author.facts.map((f) => <li>{f}</li>)}
+    </ul>
+    <p class="author-box__bio">{author.bio}</p>
+  </div>
+</aside>
+
+<style>
+  .author-box {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px;
+    margin: 40px 0;
+    border-left: 5px solid var(--cd-primary);
+  }
+  .author-box__avatar {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--cd-primary-soft);
+    padding: 6px;
+  }
+  .author-box__label { margin: 0; font-size: 0.78rem; color: var(--cd-text-muted); }
+  .author-box__name { margin: 0; font-family: var(--cd-font-display); font-size: 1.2rem; font-weight: 700; }
+  .author-box__name a { color: var(--cd-text); text-decoration: none; }
+  .author-box__name a:hover { color: var(--cd-primary-dark); }
+  .author-box__name span { margin-left: 8px; font-family: var(--cd-font-sans); font-size: 0.82rem; font-weight: 400; color: var(--cd-text-muted); }
+  .author-box__facts { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 8px 0; }
+  .author-box__facts li {
+    font-size: 0.78rem;
+    padding: 0.1em 0.7em;
+    border-radius: 999px;
+    background: var(--cd-primary-soft);
+    color: var(--cd-primary-dark);
+    font-weight: 700;
+  }
+  .author-box__bio { margin: 0; font-size: 0.92rem; color: var(--cd-text-muted); line-height: 1.7; }
+  @media (max-width: 520px) {
+    .author-box { flex-direction: column; }
+  }
+</style>

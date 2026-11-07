@@ -1,14 +1,17 @@
 ---
 import Rating from './Rating.astro';
+import ReviewBadge from './ReviewBadge.astro';
 import { type Product, formatPrice, goUrl } from '../lib/data';
 
 interface Props { product: Product }
 const { product } = Astro.props;
 ---
 <article class="card product-card">
-  <div class="product-card__thumb" aria-hidden="true">{product.brand.slice(-1)}</div>
+  {product.photo
+    ? <img class="product-card__photo" src={product.photo} alt={product.name} loading="lazy" />
+    : <div class="product-card__thumb" aria-hidden="true">{product.brand.slice(-1)}</div>}
   <div class="product-card__body">
-    <p class="product-card__brand">{product.brand}</p>
+    <p class="product-card__brand">{product.brand} <ReviewBadge type={product.reviewType} /></p>
     <h3 class="product-card__name">{product.name}</h3>
     <Rating value={product.rating} />
     <p class="product-card__summary">{product.summary}</p>
@@ -33,6 +36,7 @@ const { product } = Astro.props;
     font-size: 3rem;
     font-weight: 900;
   }
+  .product-card__photo { width: 100%; height: 180px; object-fit: cover; }
   .product-card__body { padding: 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
   .product-card__brand { margin: 0; font-size: 0.8rem; color: var(--cd-text-muted); }
   .product-card__name { margin: 0; font-size: 1.1rem; }

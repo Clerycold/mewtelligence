@@ -3,7 +3,8 @@ import { render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProductCompare from '../../components/ProductCompare.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
-import { getCategory } from '../../lib/data';
+import AuthorBox from '../../components/AuthorBox.astro';
+import { authorAvatar, getAuthor, getCategory } from '../../lib/data';
 import { getPublishedArticles } from '../../lib/articles';
 
 export async function getStaticPaths() {
@@ -14,7 +15,9 @@ export async function getStaticPaths() {
 interface Props { article: CollectionEntry<'articles'> }
 const { article } = Astro.props;
 const { Content } = await render(article);
-const { title, description, pubDate, updatedDate, products: productIds } = article.data;
+const { title, description, pubDate, updatedDate, products: productIds, sources } = article.data;
+const author = getAuthor(article.data.author);
+const authorUrl = new URL(`/author/${author.id}/`, Astro.site).href;
 const category = getCategory(article.data.category)!;
 
 const related = (await getPublishedArticles())
@@ -33,7 +36,7 @@ const jsonLd = [
     dateModified: (updatedDate ?? pubDate).toISOString(),
     inLanguage: 'zh-Hant-TW',
     mainEntityOfPage: pageUrl,
-    author: { '@type': 'Organization', name: 'Mewtelligence 編輯部' },
+    author: { '@type': 'Person', name: author.name, url: authorUrl, jobTitle: author.role },
     publisher: { '@type': 'Organization', name: 'Mewtelligence' },
   },
   {
@@ -62,6 +65,10 @@ const jsonLd = [
       <a class="tag" href={`/category/${category.slug}/`}>{category.name}</a>
       <h1>{title}</h1>
       <p class="meta">
+        <a class="byline" href={`/author/${author.id}/`}>
+          <img src={authorAvatar(author)} alt="" width="24" height="24" />文／{author.name}
+        </a>
+        ·
         <time datetime={pubDate.toISOString()}>{fmt(pubDate)}</time>
         {updatedDate && <> · 更新於 <time datetime={updatedDate.toISOString()}>{fmt(updatedDate)}</time></>}
       </p>
@@ -75,6 +82,19 @@ const jsonLd = [
     </div>
 
     <ProductCompare ids={productIds} />
+
+    {sources.length > 0 && (
+      <section class="sources" aria-labelledby="sources-heading">
+        <h2 id="sources-heading">參考資料</h2>
+        <ol>
+          {sources.map((s) => (
+            <li><a href={s.url} rel="noopener" target="_blank">{s.title}</a></li>
+          ))}
+        </ol>
+      </section>
+    )}
+
+    <AuthorBox author={author} />
   </article>
 
   {related.length > 0 && (
@@ -89,7 +109,12 @@ const jsonLd = [
   .article { padding-top: 28px; max-width: 820px; }
   .crumbs { font-size: 0.85rem; color: var(--cd-text-muted); margin-bottom: 12px; }
   header h1 { margin: 12px 0 8px; }
-  .meta { color: var(--cd-text-muted); font-size: 0.88rem; margin: 0 0 16px; }
+  .meta { color: var(--cd-text-muted); font-size: 0.88rem; margin: 0 0 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .byline { display: inline-flex; align-items: center; gap: 6px; color: var(--cd-text); font-weight: 700; text-decoration: none; }
+  .byline img { border-radius: 50%; background: var(--cd-primary-soft); padding: 2px; }
+  .sources { font-size: 0.9rem; }
+  .sources h2 { font-size: 1.1rem; }
+  .sources ol { padding-left: 1.4em; color: var(--cd-text-muted); }
   .prose { font-size: 1.05rem; }
   .prose :global(h2) { padding-left: 12px; border-left: 5px solid var(--cd-primary); }
   .prose :global(blockquote) {
