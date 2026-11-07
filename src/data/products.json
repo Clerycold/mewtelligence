@@ -21,8 +21,8 @@
     "cons": [
       "價格偏高"
     ],
-    "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/food-salmon-gf",
+    "merchant": "momo",
+    "affiliateUrl": "https://www.momoshop.com.tw/search/searchShop.jsp?keyword=%E7%84%A1%E7%A9%80%20%E9%AE%AD%E9%AD%9A%20%E8%B2%93%E9%A3%BC%E6%96%99",
     "reviewType": "research"
   },
   {
@@ -47,8 +47,8 @@
       "含穀物",
       "蛋白質較低"
     ],
-    "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/food-chicken-daily",
+    "merchant": "蝦皮",
+    "affiliateUrl": "https://shopee.tw/search?keyword=%E9%9B%9E%E8%82%89%20%E5%85%A8%E9%BD%A1%20%E8%B2%93%E9%A3%BC%E6%96%99",
     "reviewType": "research"
   },
   {
@@ -73,8 +73,8 @@
       "開罐後需冷藏",
       "單價較高"
     ],
-    "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/food-tuna-can",
+    "merchant": "PChome 24h",
+    "affiliateUrl": "https://24h.pchome.com.tw/search/?q=%E8%B2%93%20%E4%B8%BB%E9%A3%9F%E7%BD%90",
     "reviewType": "research"
   },
   {
@@ -100,8 +100,8 @@
       "受潮易發霉",
       "除臭力普通"
     ],
-    "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/litter-tofu-original",
+    "merchant": "蝦皮",
+    "affiliateUrl": "https://shopee.tw/search?keyword=%E8%B1%86%E8%85%90%E7%A0%82",
     "reviewType": "research"
   },
   {
@@ -127,8 +127,8 @@
       "有粉塵",
       "不能沖馬桶"
     ],
-    "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/litter-bentonite-pro",
+    "merchant": "momo",
+    "affiliateUrl": "https://www.momoshop.com.tw/search/searchShop.jsp?keyword=%E7%A4%A6%E7%A0%82%20%E8%B2%93%E7%A0%82",
     "reviewType": "research"
   },
   {
@@ -152,8 +152,8 @@
     "cons": [
       "顏色深不易觀察尿色"
     ],
-    "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/litter-mix-charcoal",
+    "merchant": "PChome 24h",
+    "affiliateUrl": "https://24h.pchome.com.tw/search/?q=%E6%B7%B7%E5%90%88%E8%B2%93%E7%A0%82",
     "reviewType": "research"
   },
   {
@@ -179,8 +179,8 @@
       "需要人陪玩",
       "羽毛消耗快"
     ],
-    "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/toy-feather-wand",
+    "merchant": "蝦皮",
+    "affiliateUrl": "https://shopee.tw/search?keyword=%E9%80%97%E8%B2%93%E6%A3%92%20%E7%BE%BD%E6%AF%9B",
     "reviewType": "research"
   },
   {
@@ -205,8 +205,8 @@
       "抓不到實體易挫折",
       "需注意別照到眼睛"
     ],
-    "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/toy-auto-laser",
+    "merchant": "Yahoo購物中心",
+    "affiliateUrl": "https://tw.buy.yahoo.com/search/product?p=%E8%87%AA%E5%8B%95%20%E9%9B%B7%E5%B0%84%20%E9%80%97%E8%B2%93",
     "reviewType": "research"
   },
   {
@@ -231,8 +231,8 @@
       "需要教學期",
       "清洗較麻煩"
     ],
-    "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/toy-puzzle-feeder",
+    "merchant": "momo",
+    "affiliateUrl": "https://www.momoshop.com.tw/search/searchShop.jsp?keyword=%E8%B2%93%20%E7%9B%8A%E6%99%BA%20%E6%85%A2%E9%A3%9F",
     "reviewType": "research"
   },
   {
@@ -257,8 +257,8 @@
       "佔空間",
       "價格高"
     ],
-    "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/furniture-tower-xl",
+    "merchant": "Yahoo購物中心",
+    "affiliateUrl": "https://tw.buy.yahoo.com/search/product?p=%E5%AF%A6%E6%9C%A8%20%E8%B2%93%E8%B7%B3%E5%8F%B0",
     "reviewType": "research"
   },
   {
@@ -283,8 +283,8 @@
       "紙屑較多",
       "需定期更換"
     ],
-    "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/furniture-scratcher-wave",
+    "merchant": "蝦皮",
+    "affiliateUrl": "https://shopee.tw/search?keyword=%E8%B2%93%E6%8A%93%E6%9D%BF%20%E7%93%A6%E6%A5%9E",
     "reviewType": "research"
   },
   {
@@ -309,8 +309,8 @@
       "需光滑玻璃",
       "吸盤需定期檢查"
     ],
-    "merchant": "範例商店",
-    "affiliateUrl": "https://example.com/products/furniture-window-bed",
+    "merchant": "蝦皮",
+    "affiliateUrl": "https://shopee.tw/search?keyword=%E5%90%B8%E7%9B%A4%20%E8%B2%93%E5%90%8A%E5%BA%8A",
     "reviewType": "research"
   }
 ]
