@@ -3,10 +3,7 @@ title: 貓跳台、貓抓板、貓吊床怎麼選？小坪數也適用的貓家�
 description: 貓咪需要垂直空間和磨爪的地方。這篇比較三種常見貓家具，從尺寸、承重到組裝難度幫你挑。
 category: furniture
 pubDate: 2026-10-10
-products:
-  - furniture-tower-xl
-  - furniture-scratcher-wave
-  - furniture-window-bed
+products: []
 ---
 
 貓咪喜歡待在高處觀察環境，也需要固定的地方磨爪。準備好貓家具，不只讓貓咪更有安全感，也能保護你的沙發。

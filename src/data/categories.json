@@ -4,7 +4,12 @@
     "name": "貓飼料",
     "description": "乾糧、濕食、主食罐的成分與價格比較，幫你挑出適合自家貓咪的主食。",
     "specLabels": {
+      "calories": "熱量（每 100g）",
       "protein": "粗蛋白",
+      "fat": "粗脂肪",
+      "fiber": "粗纖維",
+      "ash": "灰份",
+      "moisture": "水分",
       "grainFree": "無穀",
       "weight": "包裝重量",
       "origin": "產地"

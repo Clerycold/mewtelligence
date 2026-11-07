@@ -6,10 +6,11 @@ import { categories, products } from '../lib/data';
 import { getPublishedArticles } from '../lib/articles';
 
 const articles = await getPublishedArticles();
-// 實際使用過的商品優先，其次依評分
-const featured = [...products]
-  .sort((a, b) => Number(b.reviewType === 'hands-on') - Number(a.reviewType === 'hands-on') || (b.rating ?? 0) - (a.rating ?? 0))
-  .slice(0, 3);
+// 只放作者家實際使用的商品，依評分排序
+const featured = products
+  .filter((p) => p.reviewType === 'hands-on')
+  .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))
+  .slice(0, 6);
 
 const jsonLd = {
   '@type': 'WebSite',
@@ -55,12 +56,14 @@ const jsonLd = {
       </div>
     </section>
 
-    <section aria-labelledby="top-heading">
-      <h2 id="top-heading">高評分好物</h2>
-      <div class="grid">
-        {featured.map((p) => <ProductCard product={p} />)}
-      </div>
-    </section>
+    {featured.length > 0 && (
+      <section aria-labelledby="top-heading">
+        <h2 id="top-heading">我們家三隻貓在用的</h2>
+        <div class="grid">
+          {featured.map((p) => <ProductCard product={p} />)}
+        </div>
+      </section>
+    )}
   </div>
 </BaseLayout>
 

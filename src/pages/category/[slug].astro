@@ -38,8 +38,17 @@ const jsonLd = {
       )}
     </section>
 
-    <ProductCompare products={items} title={`${category.name}全部比較`} />
-    <p class="disclosure">本頁含聯盟行銷連結，透過連結購買不會增加你的費用，Mewtelligence 可能獲得分潤。</p>
+    {items.length > 0 ? (
+      <>
+        <ProductCompare products={items} title={`${category.name}全部比較`} />
+        <p class="disclosure">本頁含聯盟行銷連結，透過連結購買不會增加你的費用，Mewtelligence 可能獲得分潤。</p>
+      </>
+    ) : (
+      <section aria-labelledby="products-heading">
+        <h2 id="products-heading">{category.name}商品比較</h2>
+        <p class="empty">我們只放自家貓實際用過或確實查證過的商品，這個分類的商品正在整理中。</p>
+      </section>
+    )}
   </div>
 </BaseLayout>
 

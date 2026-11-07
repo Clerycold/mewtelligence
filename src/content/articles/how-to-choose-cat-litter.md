@@ -3,10 +3,7 @@ title: 貓砂怎麼選？豆腐砂、礦砂、混合砂優缺點一次看
 description: 從凝結力、粉塵量、除臭力和能不能沖馬桶四個面向，比較三種最常見的貓砂，幫你找到適合自己家的那一種。
 category: litter
 pubDate: 2026-11-01
-products:
-  - litter-tofu-original
-  - litter-bentonite-pro
-  - litter-mix-charcoal
+products: []
 ---
 
 貓砂是每天都要面對的東西，選錯了不只主人鏟得辛苦，貓咪也可能因為不喜歡而亂尿。這篇用四個最實際的指標，比較市面上最常見的三種貓砂。
@@ -38,4 +35,3 @@ products:
 - 貓咪很挑、只認礦砂 → 礦砂
 - 多貓家庭、在意氣味 → 混合砂
 
-下面是三款的詳細規格比較：

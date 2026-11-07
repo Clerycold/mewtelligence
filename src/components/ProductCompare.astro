@@ -22,7 +22,7 @@ const specRows = new Map<string, string>();
 for (const p of items) {
   const cat = categories.find((c) => c.slug === p.category);
   for (const [key, label] of Object.entries(cat?.specLabels ?? {})) {
-    if (!specRows.has(key)) specRows.set(key, label);
+    if (!specRows.has(key) && items.some((x) => x.specs[key])) specRows.set(key, label);
   }
 }
 

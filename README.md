@@ -15,7 +15,7 @@ npm run deploy   # build 並部署到 Cloudflare Pages（需先 wrangler login�
 
 | 路徑 | 用途 |
 |---|---|
-| `src/data/products.json` | 商品資料庫（目前是**範例資料**，上線前請換成真實商品） |
+| `src/data/products.json` | 商品資料庫（只放實際使用或確實查證過的商品） |
 | `src/data/categories.json` | 分類與各分類的比較規格欄位 |
 | `src/content/articles/*.md` | 文章（Markdown） |
 | `src/components/ProductCompare.astro` | 商品比較表元件 |

@@ -3,10 +3,7 @@ title: 室內貓太無聊？三種玩具讓貓咪動起來
 description: 逗貓棒、自動雷射、益智餵食器各有適合的情境。這篇比較三種玩具的優缺點，幫上班族也能照顧到貓咪的運動需求。
 category: toys
 pubDate: 2026-10-18
-products:
-  - toy-feather-wand
-  - toy-auto-laser
-  - toy-puzzle-feeder
+products: []
 ---
 
 室內貓活動空間有限，運動不足容易發胖，也可能因為無聊出現半夜暴衝、亂咬東西等行為。選對玩具，可以讓貓咪把精力用在對的地方。

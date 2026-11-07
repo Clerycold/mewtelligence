@@ -1,12 +1,9 @@
 ---
 title: 無穀飼料一定比較好嗎？貓飼料成分表這樣看
-description: 無穀、高蛋白、主食罐……貓飼料標示越來越多，這篇教你看懂成分表，並比較三款不同定位的飼料。
+description: 無穀、高蛋白、主食罐……貓飼料標示越來越多，這篇教你看懂成分表，以及乾糧、主食罐怎麼搭配。
 category: food
 pubDate: 2026-10-25
-products:
-  - food-salmon-gf
-  - food-chicken-daily
-  - food-tuna-can
+products: []
 ---
 
 貓是肉食動物，需要大量動物性蛋白質。不過「無穀」並不等於「比較好」，重點還是整體的營養組成，以及你家貓咪吃了是否舒服。
