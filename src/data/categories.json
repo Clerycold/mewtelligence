@@ -13,7 +13,36 @@
       "grainFree": "無穀",
       "weight": "包裝重量",
       "origin": "產地"
-    }
+    },
+    "heroTitle": "幫貓咪挑對食物，從看懂成分開始。",
+    "heroSubtitle": "從乾糧、濕食到主食罐，整理成分、營養、價格與真實使用心得，讓每一位貓奴都能找到適合自家貓咪的食物。",
+    "subtypes": [
+      {
+        "slug": "dry",
+        "name": "乾糧",
+        "blurb": "成分、蛋白質、價格比較"
+      },
+      {
+        "slug": "wet-main",
+        "name": "主食罐",
+        "blurb": "營養、含水量、適口性"
+      },
+      {
+        "slug": "topper",
+        "name": "副食罐與餐包",
+        "blurb": "口味、餵食方式、挑選技巧"
+      },
+      {
+        "slug": "treat",
+        "name": "貓咪零食",
+        "blurb": "凍乾、肉泥、點心比較"
+      }
+    ],
+    "cardSpecs": [
+      "protein",
+      "fat",
+      "moisture"
+    ]
   },
   {
     "slug": "litter",

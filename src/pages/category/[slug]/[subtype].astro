@@ -1,0 +1,43 @@
+---
+/** 子類型頁，例如 /category/food/topper/；只為有商品的子類型產生頁面 */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CategoryHero from '../../../components/CategoryHero.astro';
+import SubtypeEntries from '../../../components/SubtypeEntries.astro';
+import ProductList from '../../../components/ProductList.astro';
+import { type Category, type Subtype, categories, getProductsByCategory } from '../../../lib/data';
+
+export function getStaticPaths() {
+  return categories.flatMap((category) => {
+    const items = getProductsByCategory(category.slug);
+    return (category.subtypes ?? [])
+      .filter((s) => items.some((p) => p.subtype === s.slug))
+      .map((subtype) => ({ params: { slug: category.slug, subtype: subtype.slug }, props: { category, subtype } }));
+  });
+}
+
+interface Props { category: Category; subtype: Subtype }
+const { category, subtype } = Astro.props;
+const all = getProductsByCategory(category.slug);
+const items = all.filter((p) => p.subtype === subtype.slug);
+const description = `${subtype.name}推薦：${subtype.blurb}。整理營養標示、價格與作者家三隻貓的真實使用心得。`;
+
+const jsonLd = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: Astro.site?.href },
+    { '@type': 'ListItem', position: 2, name: category.name, item: new URL(`/category/${category.slug}/`, Astro.site).href },
+    { '@type': 'ListItem', position: 3, name: subtype.name, item: new URL(Astro.url.pathname, Astro.site).href },
+  ],
+};
+---
+<BaseLayout title={`${subtype.name}推薦｜${category.name}`} description={description} jsonLd={jsonLd}>
+  <CategoryHero
+    title={`${subtype.name}推薦`}
+    subtitle={description}
+    crumbs={[{ name: '首頁', href: '/' }, { name: category.name, href: `/category/${category.slug}/` }, { name: subtype.name }]}
+  />
+  <div class="container">
+    <ProductList category={category} products={items} title={`${subtype.name}（${items.length}）`} />
+    <SubtypeEntries category={category} products={all} current={subtype.slug} />
+  </div>
+</BaseLayout>

@@ -53,6 +53,10 @@ npm run deploy   # build 並部署到 Cloudflare Pages（需先 wrangler login�
 | `network` | 填 `"ichannels"` 會自動轉成通路王深層連結（K 值在 `src/data/affiliate.json`）；不填則直接連到商店。⚠️ 蝦皮經通路王會被導回首頁，目前對 momo、Yahoo購物中心啟用 |
 | `reviewType` | `"hands-on"`＝自家貓實際用過；`"research"`＝依官方規格整理（必填，請誠實標示） |
 | `usageNote` | 實際使用心得，例如「三隻貓輪流用了半年，老大最愛」（hands-on 才填） |
+| `subtype` | 子類型，對應 categories.json 的 `subtypes`（飼料：`dry` 乾糧、`wet-main` 主食罐、`topper` 副食罐與餐包、`treat` 零食）。有商品的子類型會自動開放入口與子頁 |
+| `ageGroup` | 適用年齡或族群，例如 `"成貓"`、`"全齡"` |
+| `usageDuration` | 實際使用多久，例如 `"兩年多"`（hands-on 才填） |
+| `weightGrams` | `price` 對應的總克數（24 罐 × 80g 填 `1920`），會自動算出每 100g 價格 |
 | `priceCheckedAt` | 價格查核日期，例如 `"2026-11-07"` |
 | `photo` | 自己拍的照片，放 `public/images/`，填 `"/images/檔名.jpg"` |
 

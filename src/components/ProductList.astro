@@ -1,0 +1,43 @@
+---
+/**
+ * 分類頁的商品區：卡片列表＋比較表
+ * 比較表只在同一子類型（沒有子類型則同一分類）有 2 個以上商品時出現。
+ */
+import ProductCard from './ProductCard.astro';
+import ProductCompare from './ProductCompare.astro';
+import { type Category, type Product } from '../lib/data';
+
+interface Props {
+  category: Category;
+  products: Product[];
+  title: string;
+}
+const { category, products, title } = Astro.props;
+
+// 實際使用的排前面
+const sorted = [...products].sort(
+  (a, b) => Number(b.reviewType === 'hands-on') - Number(a.reviewType === 'hands-on') || (b.rating ?? 0) - (a.rating ?? 0),
+);
+
+const groups = category.subtypes?.length
+  ? category.subtypes.map((s) => ({ title: `${s.name}比較`, items: sorted.filter((p) => p.subtype === s.slug) }))
+  : [{ title: `${category.name}比較`, items: sorted }];
+const compareGroups = groups.filter((g) => g.items.length >= 2);
+---
+<section class="plist" aria-labelledby="plist-heading">
+  <h2 id="plist-heading">{title}</h2>
+  {sorted.length > 0 ? (
+    <>
+      <div class="grid">{sorted.map((p) => <ProductCard product={p} />)}</div>
+      {compareGroups.map((g) => <ProductCompare products={g.items} title={g.title} />)}
+      <p class="disclosure">本頁含聯盟行銷連結，透過連結購買不會增加你的費用，Mewtelligence 可能獲得分潤。</p>
+    </>
+  ) : (
+    <p class="empty">我們只放自家貓實際用過或確實查證過的商品，這個分類的商品正在整理中。</p>
+  )}
+</section>
+
+<style>
+  .plist .disclosure { margin-top: 24px; }
+  .empty { color: var(--cd-text-muted); }
+</style>

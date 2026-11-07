@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  crumbs: { name: string; href?: string }[];
+}
+const { title, subtitle, crumbs } = Astro.props;
+---
+<section class="chero">
+  <div class="container">
+    <nav class="chero__crumbs" aria-label="麵包屑">
+      {crumbs.map((c, i) => (
+        <>
+          {i > 0 && ' › '}
+          {c.href ? <a href={c.href}>{c.name}</a> : <span>{c.name}</span>}
+        </>
+      ))}
+    </nav>
+    <h1>{title}</h1>
+    <p class="chero__sub">{subtitle}</p>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .chero {
+    background:
+      radial-gradient(circle at 92% 18%, var(--cd-primary-soft) 0 120px, transparent 121px),
+      radial-gradient(circle at 99% 85%, #fbe1c8 0 60px, transparent 61px),
+      var(--cd-surface-alt);
+    border-bottom: 1px solid var(--cd-border);
+    padding: 28px 0 40px;
+  }
+  .chero__crumbs { font-size: 0.85rem; color: var(--cd-text-muted); margin-bottom: 16px; }
+  .chero h1 { max-width: 18em; }
+  .chero__sub { max-width: 38em; color: var(--cd-text-muted); font-size: 1.05rem; margin: 0; }
+</style>

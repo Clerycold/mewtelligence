@@ -1,53 +1,116 @@
 ---
 import Rating from './Rating.astro';
 import ReviewBadge from './ReviewBadge.astro';
-import { type Product, formatPrice, goUrl } from '../lib/data';
+import { type Product, formatPrice, getCategory, getSubtype, goUrl, pricePer100g, productUrl } from '../lib/data';
 
 interface Props { product: Product }
 const { product } = Astro.props;
+
+const category = getCategory(product.category);
+const subtype = category && getSubtype(category, product.subtype);
+const handsOn = product.reviewType === 'hands-on';
+
+// 「80 g｜副食罐與餐包｜實際使用兩年多｜成貓」：有資料的才顯示
+const meta = [
+  product.specs.weight,
+  subtype?.name,
+  handsOn && product.usageDuration && `實際使用${product.usageDuration}`,
+  product.ageGroup,
+].filter(Boolean);
+
+// 卡片上的重點營養／規格：依分類設定的 cardSpecs，只列有填的
+const keySpecs = (category?.cardSpecs ?? [])
+  .filter((k) => product.specs[k])
+  .map((k) => [category!.specLabels[k] ?? k, product.specs[k]] as const);
+
+const per100 = pricePer100g(product);
 ---
-<article class="card product-card">
-  {product.photo
-    ? <img class="product-card__photo" src={product.photo} alt={product.name} loading="lazy" />
-    : <div class="product-card__thumb" aria-hidden="true">{product.brand.slice(-1)}</div>}
-  <div class="product-card__body">
-    <p class="product-card__brand">{product.brand} <ReviewBadge type={product.reviewType} /></p>
-    <h3 class="product-card__name">{product.name}</h3>
+<article class:list={['card', 'pcard', { 'pcard--handson': handsOn }]}>
+  <a class="pcard__media" href={productUrl(product)} tabindex="-1" aria-hidden="true">
+    {product.photo
+      ? <img src={product.photo} alt="" loading="lazy" />
+      : <span class="pcard__thumb">{product.brand.replace(/[（(].*/, '').trim().slice(-1)}</span>}
+  </a>
+
+  <div class="pcard__body">
+    <div class="pcard__top">
+      {handsOn && <span class="pcard__eyebrow">實際使用推薦</span>}
+      <ReviewBadge type={product.reviewType} />
+    </div>
+
+    <p class="pcard__brand">{product.brand}</p>
+    <h3 class="pcard__name"><a href={productUrl(product)}>{product.name}</a></h3>
+    {meta.length > 0 && <p class="pcard__meta">{meta.join('｜')}</p>}
     {product.rating != null && <Rating value={product.rating} />}
-    <p class="product-card__summary">{product.summary}</p>
-    <div class="product-card__foot">
-      <strong class="product-card__price">{formatPrice(product.price)}</strong>
-      <a class="btn" href={goUrl(product)} rel="sponsored nofollow noopener" target="_blank">
-        到 {product.merchant} 看價格
-      </a>
+
+    {handsOn && product.usageNote && <p class="pcard__note">「{product.usageNote}」</p>}
+
+    {(product.pros.length > 0 || product.cons.length > 0) && (
+      <ul class="pcard__pc">
+        {product.pros.slice(0, 3).map((x) => <li class="pro">{x}</li>)}
+        {product.cons.slice(0, 2).map((x) => <li class="con">{x}</li>)}
+      </ul>
+    )}
+
+    {keySpecs.length > 0 && (
+      <div class="pcard__specs">
+        <table>
+          <tbody>
+            {keySpecs.map(([label, value]) => (
+              <tr><th scope="row">{label}</th><td>{value}</td></tr>
+            ))}
+          </tbody>
+        </table>
+        {product.category === 'food' && <p class="pcard__fine">營養數據以產品包裝標示為準</p>}
+      </div>
+    )}
+
+    <div class="pcard__price">
+      <strong>{product.price != null ? formatPrice(product.price) : '價格依商店即時資訊為準'}</strong>
+      {per100 != null && <span>每 100g 約 NT${per100}</span>}
+    </div>
+
+    <div class="pcard__actions">
+      <a class="btn btn--ghost" href={productUrl(product)}>查看完整評測</a>
+      <a class="btn" href={goUrl(product)} rel="sponsored nofollow noopener" target="_blank">到{product.merchant}看價格</a>
     </div>
   </div>
 </article>
 
 <style>
-  .product-card { display: flex; flex-direction: column; overflow: hidden; }
-  .product-card__thumb {
-    height: 120px;
-    display: grid;
-    place-items: center;
-    background: linear-gradient(135deg, var(--cd-primary-soft), var(--cd-surface-alt));
-    color: var(--cd-primary);
-    font-family: var(--cd-font-display);
-    font-size: 3rem;
-    font-weight: 900;
+  .pcard { display: flex; flex-direction: column; overflow: hidden; }
+  .pcard--handson { border-color: var(--cd-accent); box-shadow: 0 0 0 1px var(--cd-accent), var(--cd-shadow); }
+  .pcard__media { display: block; text-decoration: none; aspect-ratio: 16 / 9; background: linear-gradient(135deg, var(--cd-primary-soft), var(--cd-surface-alt)); }
+  .pcard__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pcard__thumb {
+    display: grid; place-items: center; height: 100%;
+    color: var(--cd-primary); font-family: var(--cd-font-display); font-size: 3.2rem; font-weight: 900;
   }
-  .product-card__photo { width: 100%; height: 180px; object-fit: cover; }
-  .product-card__body { padding: 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-  .product-card__brand { margin: 0; font-size: 0.8rem; color: var(--cd-text-muted); }
-  .product-card__name { margin: 0; font-size: 1.1rem; }
-  .product-card__summary { margin: 0; font-size: 0.92rem; color: var(--cd-text-muted); flex: 1; }
-  .product-card__foot {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: 8px;
+  .pcard__body { padding: 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .pcard__top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .pcard__eyebrow { font-size: 0.78rem; font-weight: 700; color: var(--cd-accent); letter-spacing: 0.05em; }
+  .pcard__brand { margin: 0; font-size: 0.82rem; color: var(--cd-text-muted); }
+  .pcard__name { margin: 0; font-size: 1.15rem; line-height: 1.45; }
+  .pcard__name a { color: var(--cd-text); text-decoration: none; }
+  .pcard__name a:hover { color: var(--cd-primary-dark); }
+  .pcard__meta { margin: 0; font-size: 0.85rem; color: var(--cd-text-muted); }
+  .pcard__note {
+    margin: 4px 0 0; padding: 10px 14px; border-radius: var(--cd-radius-sm);
+    background: #eef5f1; color: var(--cd-text); font-weight: 500; font-size: 0.95rem; line-height: 1.6;
   }
-  .product-card__price { font-size: 1.15rem; color: var(--cd-primary-dark); }
+  .pcard__pc { list-style: none; margin: 0; padding: 0; font-size: 0.9rem; line-height: 1.6; }
+  .pcard__pc li { position: relative; padding-left: 1.3em; }
+  .pcard__pc li::before { position: absolute; left: 0; font-weight: 700; }
+  .pcard__pc .pro::before { content: '✓'; color: var(--cd-accent); }
+  .pcard__pc .con::before { content: '✕'; color: var(--cd-danger); }
+  .pcard__specs table { width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.5; }
+  .pcard__specs th, .pcard__specs td { padding: 6px 0; border-bottom: 1px dashed var(--cd-border); text-align: left; }
+  .pcard__specs th { font-weight: 500; color: var(--cd-text-muted); width: 45%; }
+  .pcard__specs td { font-weight: 700; }
+  .pcard__fine { margin: 4px 0 0; font-size: 0.75rem; color: var(--cd-text-muted); }
+  .pcard__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: auto; padding-top: 6px; }
+  .pcard__price strong { color: var(--cd-primary-dark); font-size: 1.05rem; }
+  .pcard__price span { font-size: 0.82rem; color: var(--cd-text-muted); }
+  .pcard__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pcard__actions .btn { flex: 1 1 auto; font-size: 0.92rem; }
 </style>

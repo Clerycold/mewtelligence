@@ -1,0 +1,193 @@
+---
+/** 單一商品完整評測頁：/products/{id}/ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Rating from '../../components/Rating.astro';
+import ReviewBadge from '../../components/ReviewBadge.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import {
+  type Product, authors, formatDate, formatPrice, getCategory, getSubtype, goUrl, pricePer100g, products,
+} from '../../lib/data';
+import { getPublishedArticles } from '../../lib/articles';
+
+export function getStaticPaths() {
+  return products.map((product) => ({ params: { id: product.id }, props: { product } }));
+}
+
+interface Props { product: Product }
+const { product } = Astro.props;
+const category = getCategory(product.category)!;
+const subtype = getSubtype(category, product.subtype);
+const handsOn = product.reviewType === 'hands-on';
+const per100 = pricePer100g(product);
+const author = authors[0];
+
+const specRows = Object.entries(category.specLabels)
+  .filter(([k]) => product.specs[k])
+  .map(([k, label]) => [label, product.specs[k]]);
+// specs 裡有、但分類沒定義標籤的欄位也列出來，避免資料被藏起來
+for (const [k, v] of Object.entries(product.specs)) {
+  if (!(k in category.specLabels)) specRows.push([k, v]);
+}
+
+const articles = (await getPublishedArticles()).filter((a) => a.data.category === category.slug).slice(0, 3);
+
+const title = `${product.brand} ${product.name}${handsOn ? '｜實際使用心得' : '｜規格整理'}`;
+const description = handsOn && product.usageNote
+  ? `${product.name}：${product.usageNote}${product.summary}`
+  : product.summary;
+
+const crumbs = [
+  { name: '首頁', href: '/' },
+  { name: category.name, href: `/category/${category.slug}/` },
+  ...(subtype ? [{ name: subtype.name, href: `/category/${category.slug}/${subtype.slug}/` }] : []),
+  { name: product.name },
+];
+const jsonLd = {
+  '@type': 'BreadcrumbList',
+  itemListElement: crumbs.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.name,
+    item: new URL(c.href ?? Astro.url.pathname, Astro.site).href,
+  })),
+};
+---
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <article class="container product">
+    <nav class="crumbs" aria-label="麵包屑">
+      {crumbs.map((c, i) => <>{i > 0 && ' › '}{c.href ? <a href={c.href}>{c.name}</a> : <span>{c.name}</span>}</>)}
+    </nav>
+
+    <header class="phead">
+      <div class="phead__media">
+        {product.photo
+          ? <img src={product.photo} alt={product.name} />
+          : <span class="phead__thumb" aria-hidden="true">{product.brand.replace(/[（(].*/, '').trim().slice(-1)}</span>}
+      </div>
+      <div class="phead__info">
+        <div class="phead__badges">
+          <ReviewBadge type={product.reviewType} />
+          {subtype && <a class="tag" href={`/category/${category.slug}/${subtype.slug}/`}>{subtype.name}</a>}
+        </div>
+        <p class="phead__brand">{product.brand}</p>
+        <h1>{product.name}</h1>
+        <ul class="phead__facts">
+          {product.specs.weight && <li>容量／重量：{product.specs.weight}</li>}
+          {product.ageGroup && <li>適用：{product.ageGroup}</li>}
+          {handsOn && product.usageDuration && <li>實際使用：{product.usageDuration}</li>}
+        </ul>
+        {product.rating != null && <Rating value={product.rating} />}
+        <div class="phead__price">
+          <strong>{product.price != null ? formatPrice(product.price) : '價格依商店即時資訊為準'}</strong>
+          {per100 != null && <span>每 100g 約 NT${per100}</span>}
+          {product.priceCheckedAt && <span>（查於 {formatDate(product.priceCheckedAt)}）</span>}
+        </div>
+        <a class="btn phead__buy" href={goUrl(product)} rel="sponsored nofollow noopener" target="_blank">到{product.merchant}看價格</a>
+        <p class="disclosure">此為聯盟行銷連結，透過連結購買不會增加你的費用，Mewtelligence 可能獲得分潤。</p>
+      </div>
+    </header>
+
+    <p class="summary">{product.summary}</p>
+
+    {handsOn && product.usageNote && (
+      <section aria-labelledby="usage-heading">
+        <h2 id="usage-heading">我們家的使用心得</h2>
+        <blockquote class="usage">
+          <p>{product.usageNote}</p>
+          <footer>— {author.name}（{author.facts.join('、')}）</footer>
+        </blockquote>
+      </section>
+    )}
+
+    {(product.pros.length > 0 || product.cons.length > 0) && (
+      <section class="pc" aria-labelledby="pc-heading">
+        <h2 id="pc-heading">優點與缺點</h2>
+        <div class="pc__grid">
+          {product.pros.length > 0 && (
+            <div class="pc__col pc__col--pro">
+              <h3>優點</h3>
+              <ul>{product.pros.map((x) => <li>{x}</li>)}</ul>
+            </div>
+          )}
+          {product.cons.length > 0 && (
+            <div class="pc__col pc__col--con">
+              <h3>缺點</h3>
+              <ul>{product.cons.map((x) => <li>{x}</li>)}</ul>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+
+    {specRows.length > 0 && (
+      <section aria-labelledby="spec-heading">
+        <h2 id="spec-heading">{category.slug === 'food' ? '營養標示與規格' : '規格'}</h2>
+        <table class="spec">
+          <tbody>
+            {specRows.map(([label, value]) => <tr><th scope="row">{label}</th><td>{value}</td></tr>)}
+          </tbody>
+        </table>
+        {category.slug === 'food' && <p class="fine">營養數據依產品包裝標示整理，實際以最新包裝為準。</p>}
+      </section>
+    )}
+
+    <AuthorBox author={author} />
+  </article>
+
+  {articles.length > 0 && (
+    <section class="container" aria-labelledby="related-heading">
+      <h2 id="related-heading">{category.name}選購文章</h2>
+      <div class="grid">{articles.map((a) => <ArticleCard article={a} />)}</div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .product { padding-top: 28px; max-width: 900px; }
+  .crumbs { font-size: 0.85rem; color: var(--cd-text-muted); margin-bottom: 16px; }
+  .phead { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 28px; align-items: start; }
+  .phead__media {
+    aspect-ratio: 1; border-radius: var(--cd-radius); overflow: hidden;
+    background: linear-gradient(135deg, var(--cd-primary-soft), var(--cd-surface-alt));
+  }
+  .phead__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .phead__thumb {
+    display: grid; place-items: center; height: 100%;
+    color: var(--cd-primary); font-family: var(--cd-font-display); font-size: 5rem; font-weight: 900;
+  }
+  .phead__badges { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .phead__brand { margin: 12px 0 0; color: var(--cd-text-muted); font-size: 0.9rem; }
+  .phead h1 { margin: 4px 0 12px; font-size: clamp(1.5rem, 3.5vw, 2rem); }
+  .phead__facts { list-style: none; padding: 0; margin: 0 0 10px; font-size: 0.95rem; }
+  .phead__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: 12px 0; }
+  .phead__price strong { font-size: 1.2rem; color: var(--cd-primary-dark); }
+  .phead__price span { font-size: 0.85rem; color: var(--cd-text-muted); }
+  .phead__buy { width: 100%; max-width: 320px; padding-block: 0.8em; font-size: 1.05rem; }
+  .phead .disclosure { margin-top: 12px; }
+  .summary { font-size: 1.08rem; margin-top: 28px; }
+  .usage {
+    margin: 0; padding: 18px 22px; border-radius: var(--cd-radius);
+    background: #eef5f1; border-left: 5px solid var(--cd-accent);
+  }
+  .usage p { margin: 0; font-size: 1.15rem; font-weight: 500; }
+  .usage footer { margin-top: 8px; font-size: 0.88rem; color: var(--cd-text-muted); }
+  .pc__grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .pc__col { padding: 16px 20px; border-radius: var(--cd-radius); background: var(--cd-surface); border: 1px solid var(--cd-border); }
+  .pc__col h3 { margin: 0 0 8px; font-size: 1rem; }
+  .pc__col ul { list-style: none; margin: 0; padding: 0; }
+  .pc__col li { position: relative; padding-left: 1.4em; margin: 4px 0; }
+  .pc__col li::before { position: absolute; left: 0; font-weight: 700; }
+  .pc__col--pro li::before { content: '✓'; color: var(--cd-accent); }
+  .pc__col--con li::before { content: '✕'; color: var(--cd-danger); }
+  .spec { width: 100%; max-width: 520px; border-collapse: collapse; background: var(--cd-surface); border-radius: var(--cd-radius-sm); overflow: hidden; }
+  .spec th, .spec td { padding: 10px 14px; border-bottom: 1px solid var(--cd-border); text-align: left; }
+  .spec th { width: 45%; font-weight: 500; color: var(--cd-text-muted); background: var(--cd-surface-alt); }
+  .spec td { font-weight: 700; }
+  .fine { font-size: 0.8rem; color: var(--cd-text-muted); }
+  @media (max-width: 640px) {
+    .phead { grid-template-columns: 1fr; }
+    .phead__media { aspect-ratio: 16 / 9; }
+    .phead__buy { max-width: none; }
+  }
+</style>

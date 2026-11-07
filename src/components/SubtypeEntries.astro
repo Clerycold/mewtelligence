@@ -1,0 +1,83 @@
+---
+/** 「你正在尋找哪一種？」入口卡片：有商品的可點，沒商品的顯示「整理中」 */
+import { type Category, type Product } from '../lib/data';
+
+interface Props {
+  category: Category;
+  products: Product[];
+  current?: string;
+}
+const { category, products, current } = Astro.props;
+const entries = (category.subtypes ?? []).map((s) => ({
+  ...s,
+  count: products.filter((p) => p.subtype === s.slug).length,
+}));
+---
+{entries.length > 0 && (
+  <section class="entries" aria-labelledby="entries-heading">
+    <h2 id="entries-heading">你正在尋找哪一種{category.name.replace(/^貓/, '貓咪')}？</h2>
+    <ul>
+      {entries.map((e) => (
+        <li>
+          {e.count > 0 ? (
+            <a
+              class:list={['entry', { 'is-current': e.slug === current }]}
+              href={`/category/${category.slug}/${e.slug}/`}
+              aria-current={e.slug === current ? 'page' : undefined}
+            >
+              <strong>{e.name}</strong>
+              <span>{e.blurb}</span>
+              <em>{e.count} 項商品 →</em>
+            </a>
+          ) : (
+            <div class="entry is-empty" aria-disabled="true">
+              <strong>{e.name}</strong>
+              <span>{e.blurb}</span>
+              <em>整理中</em>
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+<style>
+  .entries h2 { margin-top: 32px; }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  }
+  .entry {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 100%;
+    padding: 16px 18px;
+    border-radius: var(--cd-radius);
+    border: 1px solid var(--cd-border);
+    border-top: 4px solid var(--cd-primary);
+    background: var(--cd-surface);
+    box-shadow: var(--cd-shadow);
+    color: inherit;
+    text-decoration: none;
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+  a.entry:hover { box-shadow: var(--cd-shadow-hover); transform: translateY(-2px); color: inherit; }
+  .entry.is-current { background: var(--cd-primary-soft); }
+  .entry strong { font-family: var(--cd-font-display); font-size: 1.15rem; }
+  .entry span { font-size: 0.88rem; color: var(--cd-text-muted); line-height: 1.6; }
+  .entry em { margin-top: auto; padding-top: 6px; font-style: normal; font-size: 0.82rem; font-weight: 700; color: var(--cd-primary-dark); }
+  .entry.is-empty { border-top-color: var(--cd-border); background: transparent; box-shadow: none; opacity: 0.75; }
+  .entry.is-empty em { color: var(--cd-text-muted); }
+  @media (max-width: 600px) {
+    ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .entry { padding: 12px 14px; }
+    .entry strong { font-size: 1.02rem; }
+    .entry span { font-size: 0.8rem; }
+  }
+</style>

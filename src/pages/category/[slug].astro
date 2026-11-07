@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
-import ProductCompare from '../../components/ProductCompare.astro';
+import CategoryHero from '../../components/CategoryHero.astro';
+import SubtypeEntries from '../../components/SubtypeEntries.astro';
+import ProductList from '../../components/ProductList.astro';
 import { type Category, categories, getProductsByCategory } from '../../lib/data';
 import { getPublishedArticles } from '../../lib/articles';
 
@@ -23,38 +25,23 @@ const jsonLd = {
   ],
 };
 ---
-<BaseLayout title={`${category.name}推薦與比較`} description={category.description} jsonLd={jsonLd}>
-  <div class="container page">
-    <nav class="crumbs" aria-label="麵包屑"><a href="/">首頁</a> › {category.name}</nav>
-    <h1>{category.name}推薦與比較</h1>
-    <p class="lead">{category.description}</p>
+<BaseLayout title={`${category.name}推薦與選購指南`} description={category.heroSubtitle ?? category.description} jsonLd={jsonLd}>
+  <CategoryHero
+    title={category.heroTitle ?? `${category.name}推薦與比較`}
+    subtitle={category.heroSubtitle ?? category.description}
+    crumbs={[{ name: '首頁', href: '/' }, { name: category.name }]}
+  />
 
-    <section aria-labelledby="articles-heading">
-      <h2 id="articles-heading">{category.name}相關文章</h2>
-      {articles.length > 0 ? (
+  <div class="container">
+    <SubtypeEntries category={category} products={items} />
+
+    <ProductList category={category} products={items} title={`${category.name}推薦`} />
+
+    {articles.length > 0 && (
+      <section aria-labelledby="articles-heading">
+        <h2 id="articles-heading">{category.name}選購文章</h2>
         <div class="grid">{articles.map((a) => <ArticleCard article={a} />)}</div>
-      ) : (
-        <p class="empty">這個分類的文章正在準備中。</p>
-      )}
-    </section>
-
-    {items.length > 0 ? (
-      <>
-        <ProductCompare products={items} title={`${category.name}全部比較`} />
-        <p class="disclosure">本頁含聯盟行銷連結，透過連結購買不會增加你的費用，Mewtelligence 可能獲得分潤。</p>
-      </>
-    ) : (
-      <section aria-labelledby="products-heading">
-        <h2 id="products-heading">{category.name}商品比較</h2>
-        <p class="empty">我們只放自家貓實際用過或確實查證過的商品，這個分類的商品正在整理中。</p>
       </section>
     )}
   </div>
 </BaseLayout>
-
-<style>
-  .page { padding-top: 28px; }
-  .crumbs { font-size: 0.85rem; color: var(--cd-text-muted); margin-bottom: 12px; }
-  .lead { color: var(--cd-text-muted); max-width: 40em; }
-  .empty { color: var(--cd-text-muted); }
-</style>
