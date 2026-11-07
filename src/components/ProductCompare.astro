@@ -27,11 +27,12 @@ for (const p of items) {
 }
 
 // 徽章：評分最高 = 編輯推薦；價格最低 = 最划算（只有 2 個以上商品才標）
-// 沒填評分或價格的商品不參與比較
-const rated = items.filter((p) => p.rating != null);
-const priced = items.filter((p) => p.price != null);
-const topRated = rated.length > 1 ? rated.reduce((a, b) => (b.rating! > a.rating! ? b : a)) : undefined;
-const cheapest = priced.length > 1 ? priced.reduce((a, b) => (b.price! < a.price! ? b : a)) : undefined;
+// 推薦標籤只頒給「實際使用」的商品，資料整理的商品不參與
+// 編輯推薦：實際使用中評分最高的（沒填評分視為 0）；最划算：實際使用且有填價格中最便宜的
+const handsOn = items.length > 1 ? items.filter((p) => p.reviewType === 'hands-on') : [];
+const priced = handsOn.filter((p) => p.price != null);
+const topRated = handsOn.length ? handsOn.reduce((a, b) => ((b.rating ?? 0) > (a.rating ?? 0) ? b : a)) : undefined;
+const cheapest = priced.length ? priced.reduce((a, b) => (b.price! < a.price! ? b : a)) : undefined;
 const badgesFor = (p: Product) => [
   p === topRated && { text: '編輯推薦', cls: 'top' },
   p === cheapest && { text: '最划算', cls: 'value' },
