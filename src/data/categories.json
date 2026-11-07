@@ -1,0 +1,46 @@
+[
+  {
+    "slug": "food",
+    "name": "貓飼料",
+    "description": "乾糧、濕食、主食罐的成分與價格比較，幫你挑出適合自家貓咪的主食。",
+    "specLabels": {
+      "protein": "粗蛋白",
+      "grainFree": "無穀",
+      "weight": "包裝重量",
+      "origin": "產地"
+    }
+  },
+  {
+    "slug": "litter",
+    "name": "貓砂",
+    "description": "礦砂、豆腐砂、木屑砂、水晶砂的凝結力、粉塵量與除臭效果比較。",
+    "specLabels": {
+      "material": "材質",
+      "clumping": "凝結力",
+      "dust": "粉塵量",
+      "flushable": "可沖馬桶"
+    }
+  },
+  {
+    "slug": "toys",
+    "name": "貓玩具",
+    "description": "逗貓棒、電動玩具、益智餵食器，讓室內貓也能動起來。",
+    "specLabels": {
+      "type": "類型",
+      "power": "電源",
+      "material": "材質",
+      "soloPlay": "可獨自玩"
+    }
+  },
+  {
+    "slug": "furniture",
+    "name": "貓家具",
+    "description": "貓跳台、貓抓板、貓窩的尺寸、穩固度與耐用度比較。",
+    "specLabels": {
+      "size": "尺寸",
+      "material": "材質",
+      "maxLoad": "建議承重",
+      "assembly": "組裝難度"
+    }
+  }
+]

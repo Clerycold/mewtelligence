@@ -1,0 +1,32 @@
+---
+interface Props { size?: number }
+const { size = 36 } = Astro.props;
+---
+<span class="logo">
+  <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true">
+    <!-- 橘貓頭：兩耳＋圓臉＋一撮瀏海 -->
+    <path d="M10 26 L14 6 L28 18 Z" fill="#e8833a" />
+    <path d="M54 26 L50 6 L36 18 Z" fill="#e8833a" />
+    <path d="M14 10 L16 20 L22 16 Z" fill="#fde6d3" />
+    <path d="M50 10 L48 20 L42 16 Z" fill="#fde6d3" />
+    <circle cx="32" cy="36" r="22" fill="#e8833a" />
+    <path d="M26 15 Q32 22 38 15 Q36 24 32 25 Q28 24 26 15 Z" fill="#c96a24" />
+    <ellipse cx="24" cy="36" rx="3" ry="4" fill="#3a2c24" />
+    <ellipse cx="40" cy="36" rx="3" ry="4" fill="#3a2c24" />
+    <path d="M29 44 L35 44 L32 47 Z" fill="#3a2c24" />
+    <path d="M32 47 Q29 51 26 49 M32 47 Q35 51 38 49" stroke="#3a2c24" stroke-width="1.8" fill="none" stroke-linecap="round" />
+  </svg>
+  <span class="logo__text"><span>Mew</span>telligence</span>
+</span>
+
+<style>
+  .logo { display: inline-flex; align-items: center; gap: 8px; }
+  .logo__text {
+    font-family: var(--cd-font-display);
+    font-weight: 900;
+    font-size: 1.45rem;
+    letter-spacing: -0.01em;
+    color: var(--cd-text);
+  }
+  .logo__text span { color: var(--cd-primary); }
+</style>

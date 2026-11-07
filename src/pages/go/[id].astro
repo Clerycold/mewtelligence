@@ -1,0 +1,31 @@
+---
+/**
+ * /go/{商品id}/ 導購跳轉
+ * 正式環境：Cloudflare Pages 會先吃 dist/_redirects（scripts/gen-redirects.mjs 產生）做 302 伺服器端跳轉。
+ * 這個頁面是備援：本機 dev / preview 或 _redirects 沒生效時，用 meta refresh + JS 跳轉。
+ */
+import { products, type Product } from '../../lib/data';
+
+export function getStaticPaths() {
+  return products.map((product) => ({ params: { id: product.id }, props: { product } }));
+}
+
+interface Props { product: Product }
+const { product } = Astro.props;
+const target = product.affiliateUrl;
+---
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <title>前往 {product.merchant}…</title>
+    <script is:inline define:vars={{ target }}>location.replace(target);</script>
+  </head>
+  <body style="font-family:system-ui,sans-serif;text-align:center;padding:64px 16px;background:#fffaf3;color:#3a2c24">
+    <p>正在前往 {product.merchant}…</p>
+    <p><a href={target} rel="sponsored nofollow noopener">沒有自動跳轉？請點這裡</a></p>
+  </body>
+</html>

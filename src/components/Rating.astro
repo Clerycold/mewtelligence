@@ -1,0 +1,22 @@
+---
+interface Props { value: number }
+const { value } = Astro.props;
+const pct = Math.max(0, Math.min(100, (value / 5) * 100));
+---
+<span class="rating" aria-label={`評分 ${value} / 5`}>
+  <span class="rating__stars" style={`--pct:${pct}%`} aria-hidden="true">★★★★★</span>
+  <span class="rating__num">{value.toFixed(1)}</span>
+</span>
+
+<style>
+  .rating { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .rating__stars {
+    font-size: 1rem;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, var(--cd-star) var(--pct), #e5d9cc var(--pct));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .rating__num { font-weight: 700; font-size: 0.9rem; }
+</style>

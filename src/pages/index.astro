@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { categories, products } from '../lib/data';
+import { getPublishedArticles } from '../lib/articles';
+
+const articles = await getPublishedArticles();
+const featured = [...products].sort((a, b) => b.rating - a.rating).slice(0, 3);
+
+const jsonLd = {
+  '@type': 'WebSite',
+  name: 'Mewtelligence',
+  url: Astro.site?.href,
+  inLanguage: 'zh-Hant-TW',
+};
+---
+<BaseLayout
+  title="Mewtelligence"
+  description="給貓奴的日常好物指南：貓飼料、貓砂、玩具、貓跳台實際比較，幫你少踩雷、買對東西。"
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="container hero__inner">
+      <p class="hero__eyebrow">給貓奴的日常好物指南</p>
+      <h1>讓貓咪過得更好的<br /><span>每一件小事</span></h1>
+      <p class="hero__lead">飼料、貓砂、玩具、貓家具，逐項比較規格與優缺點，幫你挑到真正適合的。</p>
+      <div class="hero__cta">
+        <a class="btn" href="#latest">看最新文章</a>
+        <a class="btn btn--ghost" href="/category/food/">從飼料開始</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <section aria-labelledby="cat-heading">
+      <h2 id="cat-heading">依分類瀏覽</h2>
+      <div class="cats">
+        {categories.map((c) => (
+          <a class="card cat" href={`/category/${c.slug}/`}>
+            <strong>{c.name}</strong>
+            <span>{c.description}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section id="latest" aria-labelledby="latest-heading">
+      <h2 id="latest-heading">最新文章</h2>
+      <div class="grid">
+        {articles.map((a) => <ArticleCard article={a} />)}
+      </div>
+    </section>
+
+    <section aria-labelledby="top-heading">
+      <h2 id="top-heading">高評分好物</h2>
+      <div class="grid">
+        {featured.map((p) => <ProductCard product={p} />)}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero {
+    background:
+      radial-gradient(circle at 85% 20%, var(--cd-primary-soft) 0 140px, transparent 141px),
+      radial-gradient(circle at 95% 80%, #fbe1c8 0 70px, transparent 71px),
+      var(--cd-surface-alt);
+    padding: 56px 0 64px;
+    border-bottom: 1px solid var(--cd-border);
+  }
+  .hero__eyebrow { margin: 0 0 8px; color: var(--cd-primary-dark); font-weight: 700; }
+  .hero h1 span { color: var(--cd-primary); }
+  .hero__lead { max-width: 36em; color: var(--cd-text-muted); font-size: 1.05rem; }
+  .hero__cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+  .cats {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  }
+  .cat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    border-top: 4px solid var(--cd-primary);
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+  .cat:hover { box-shadow: var(--cd-shadow-hover); transform: translateY(-2px); color: inherit; }
+  .cat strong { font-family: var(--cd-font-display); font-size: 1.2rem; }
+  .cat span { font-size: 0.88rem; color: var(--cd-text-muted); line-height: 1.6; }
+</style>

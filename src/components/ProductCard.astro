@@ -1,0 +1,49 @@
+---
+import Rating from './Rating.astro';
+import { type Product, formatPrice, goUrl } from '../lib/data';
+
+interface Props { product: Product }
+const { product } = Astro.props;
+---
+<article class="card product-card">
+  <div class="product-card__thumb" aria-hidden="true">{product.brand.slice(-1)}</div>
+  <div class="product-card__body">
+    <p class="product-card__brand">{product.brand}</p>
+    <h3 class="product-card__name">{product.name}</h3>
+    <Rating value={product.rating} />
+    <p class="product-card__summary">{product.summary}</p>
+    <div class="product-card__foot">
+      <strong class="product-card__price">{formatPrice(product.price)}</strong>
+      <a class="btn" href={goUrl(product)} rel="sponsored nofollow noopener" target="_blank">
+        到 {product.merchant} 看價格
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .product-card { display: flex; flex-direction: column; overflow: hidden; }
+  .product-card__thumb {
+    height: 120px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--cd-primary-soft), var(--cd-surface-alt));
+    color: var(--cd-primary);
+    font-family: var(--cd-font-display);
+    font-size: 3rem;
+    font-weight: 900;
+  }
+  .product-card__body { padding: 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .product-card__brand { margin: 0; font-size: 0.8rem; color: var(--cd-text-muted); }
+  .product-card__name { margin: 0; font-size: 1.1rem; }
+  .product-card__summary { margin: 0; font-size: 0.92rem; color: var(--cd-text-muted); flex: 1; }
+  .product-card__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .product-card__price { font-size: 1.15rem; color: var(--cd-primary-dark); }
+</style>

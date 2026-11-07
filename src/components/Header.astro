@@ -1,0 +1,68 @@
+---
+import Logo from './Logo.astro';
+import { categories } from '../lib/data';
+
+const path = Astro.url.pathname;
+---
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="/" class="site-header__brand" aria-label="Mewtelligence 首頁"><Logo /></a>
+    <nav aria-label="主要分類">
+      <ul>
+        {categories.map((c) => {
+          const href = `/category/${c.slug}/`;
+          return (
+            <li>
+              <a href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>{c.name}</a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: var(--cd-surface);
+    border-bottom: 1px solid var(--cd-border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 64px;
+    flex-wrap: wrap;
+  }
+  .site-header__brand { text-decoration: none; }
+  nav ul {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+  }
+  nav a {
+    display: block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    color: var(--cd-text);
+    text-decoration: none;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  nav a:hover, nav a[aria-current='page'] {
+    background: var(--cd-primary-soft);
+    color: var(--cd-primary-dark);
+  }
+  @media (max-width: 600px) {
+    .site-header__inner { padding-block: 8px; }
+    nav { width: 100%; }
+    nav a { padding: 4px 10px; font-size: 0.95rem; }
+  }
+</style>

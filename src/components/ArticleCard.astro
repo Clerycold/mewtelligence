@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCategory } from '../lib/data';
+
+interface Props { article: CollectionEntry<'articles'> }
+const { article } = Astro.props;
+const cat = getCategory(article.data.category);
+const date = article.data.pubDate.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<article class="card article-card">
+  <a href={`/articles/${article.id}/`} class="article-card__link">
+    <span class="tag">{cat?.name}</span>
+    <h3>{article.data.title}</h3>
+    <p>{article.data.description}</p>
+    <time datetime={article.data.pubDate.toISOString()}>{date}</time>
+  </a>
+</article>
+
+<style>
+  .article-card { transition: box-shadow 0.15s, transform 0.15s; }
+  .article-card:hover { box-shadow: var(--cd-shadow-hover); transform: translateY(-2px); }
+  .article-card__link { display: block; padding: 20px; color: inherit; text-decoration: none; height: 100%; }
+  h3 { margin: 10px 0 6px; font-size: 1.15rem; }
+  p { margin: 0 0 10px; color: var(--cd-text-muted); font-size: 0.92rem; line-height: 1.7; }
+  time { font-size: 0.8rem; color: var(--cd-text-muted); }
+</style>

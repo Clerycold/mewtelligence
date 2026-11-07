@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import ProductCompare from '../../components/ProductCompare.astro';
+import { type Category, categories, getProductsByCategory } from '../../lib/data';
+import { getPublishedArticles } from '../../lib/articles';
+
+export function getStaticPaths() {
+  return categories.map((category) => ({ params: { slug: category.slug }, props: { category } }));
+}
+
+interface Props { category: Category }
+const { category } = Astro.props;
+
+const articles = (await getPublishedArticles()).filter((a) => a.data.category === category.slug);
+const items = getProductsByCategory(category.slug);
+
+const jsonLd = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '首頁', item: Astro.site?.href },
+    { '@type': 'ListItem', position: 2, name: category.name, item: new URL(Astro.url.pathname, Astro.site).href },
+  ],
+};
+---
+<BaseLayout title={`${category.name}推薦與比較`} description={category.description} jsonLd={jsonLd}>
+  <div class="container page">
+    <nav class="crumbs" aria-label="麵包屑"><a href="/">首頁</a> › {category.name}</nav>
+    <h1>{category.name}推薦與比較</h1>
+    <p class="lead">{category.description}</p>
+
+    <section aria-labelledby="articles-heading">
+      <h2 id="articles-heading">{category.name}相關文章</h2>
+      {articles.length > 0 ? (
+        <div class="grid">{articles.map((a) => <ArticleCard article={a} />)}</div>
+      ) : (
+        <p class="empty">這個分類的文章正在準備中。</p>
+      )}
+    </section>
+
+    <ProductCompare products={items} title={`${category.name}全部比較`} />
+    <p class="disclosure">本頁含聯盟行銷連結，透過連結購買不會增加你的費用，Mewtelligence 可能獲得分潤。</p>
+  </div>
+</BaseLayout>
+
+<style>
+  .page { padding-top: 28px; }
+  .crumbs { font-size: 0.85rem; color: var(--cd-text-muted); margin-bottom: 12px; }
+  .lead { color: var(--cd-text-muted); max-width: 40em; }
+  .empty { color: var(--cd-text-muted); }
+</style>

@@ -1,0 +1,43 @@
+---
+import Logo from './Logo.astro';
+import { categories } from '../lib/data';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>
+      <Logo size={28} />
+      <p>給貓奴的日常好物指南。實際比較、誠實推薦。</p>
+    </div>
+    <ul>
+      {categories.map((c) => <li><a href={`/category/${c.slug}/`}>{c.name}</a></li>)}
+    </ul>
+  </div>
+  <div class="container">
+    <p class="site-footer__legal">
+      本站部分連結為聯盟行銷連結，透過連結購買，Mewtelligence 可能獲得分潤，不影響你的購買價格。<br />
+      © {year} Mewtelligence
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 64px;
+    padding: 40px 0 24px;
+    background: var(--cd-surface-alt);
+    border-top: 1px solid var(--cd-border);
+    font-size: 0.92rem;
+  }
+  .site-footer__inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .site-footer p { color: var(--cd-text-muted); margin: 8px 0 0; }
+  .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+  .site-footer a { color: var(--cd-text); text-decoration: none; }
+  .site-footer a:hover { color: var(--cd-primary-dark); }
+  .site-footer__legal { margin-top: 24px !important; font-size: 0.8rem; }
+</style>

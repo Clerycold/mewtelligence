@@ -1,0 +1,135 @@
+---
+/**
+ * 商品比較表
+ * 用法：<ProductCompare ids={['food-salmon-gf', 'food-chicken-daily']} />
+ *   或：<ProductCompare products={productArray} />
+ */
+import Rating from './Rating.astro';
+import { type Product, categories, formatPrice, getProductsByIds, goUrl } from '../lib/data';
+
+interface Props {
+  ids?: string[];
+  products?: Product[];
+  title?: string;
+}
+
+const { ids, title = '商品比較表' } = Astro.props;
+const items: Product[] = Astro.props.products ?? getProductsByIds(ids ?? []);
+
+// 規格列：合併所有商品所屬分類的欄位，保持分類定義的順序
+const specRows = new Map<string, string>();
+for (const p of items) {
+  const cat = categories.find((c) => c.slug === p.category);
+  for (const [key, label] of Object.entries(cat?.specLabels ?? {})) {
+    if (!specRows.has(key)) specRows.set(key, label);
+  }
+}
+
+// 徽章：評分最高 = 編輯推薦；價格最低 = 最划算（只有 2 個以上商品才標）
+const topRated = items.length > 1 ? items.reduce((a, b) => (b.rating > a.rating ? b : a)) : undefined;
+const cheapest = items.length > 1 ? items.reduce((a, b) => (b.price < a.price ? b : a)) : undefined;
+const badgesFor = (p: Product) => [
+  p === topRated && { text: '編輯推薦', cls: 'top' },
+  p === cheapest && { text: '最划算', cls: 'value' },
+].filter(Boolean) as { text: string; cls: string }[];
+---
+{items.length > 0 && (
+  <section class="compare" aria-label={title}>
+    <h2 class="compare__title">{title}</h2>
+    <div class="compare__scroll" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col" class="compare__label"><span class="sr-only">項目</span></th>
+            {items.map((p) => (
+              <th scope="col" class:list={['compare__head', { 'is-top': p === topRated }]}>
+                <div class="compare__badges">
+                  {badgesFor(p).map((b) => <span class={`badge badge--${b.cls}`}>{b.text}</span>)}
+                </div>
+                <span class="compare__brand">{p.brand}</span>
+                <span class="compare__name">{p.name}</span>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="compare__label">參考價格</th>
+            {items.map((p) => <td class="compare__price">{formatPrice(p.price)}</td>)}
+          </tr>
+          <tr>
+            <th scope="row" class="compare__label">評分</th>
+            {items.map((p) => <td><Rating value={p.rating} /></td>)}
+          </tr>
+          {[...specRows].map(([key, label]) => (
+            <tr>
+              <th scope="row" class="compare__label">{label}</th>
+              {items.map((p) => <td>{p.specs[key] ?? '—'}</td>)}
+            </tr>
+          ))}
+          <tr>
+            <th scope="row" class="compare__label">優點</th>
+            {items.map((p) => (
+              <td><ul class="list list--pro">{p.pros.map((x) => <li>{x}</li>)}</ul></td>
+            ))}
+          </tr>
+          <tr>
+            <th scope="row" class="compare__label">缺點</th>
+            {items.map((p) => (
+              <td><ul class="list list--con">{p.cons.map((x) => <li>{x}</li>)}</ul></td>
+            ))}
+          </tr>
+          <tr>
+            <th scope="row" class="compare__label"><span class="sr-only">購買</span></th>
+            {items.map((p) => (
+              <td>
+                <a class="btn" href={goUrl(p)} rel="sponsored nofollow noopener" target="_blank">查看價格</a>
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="compare__note">價格為撰文時參考價，實際以商店頁面為準。</p>
+  </section>
+)}
+
+<style>
+  .compare { margin: 40px 0; }
+  .compare__title { margin-top: 0; }
+  .compare__scroll {
+    overflow-x: auto;
+    border: 1px solid var(--cd-border);
+    border-radius: var(--cd-radius);
+    background: var(--cd-surface);
+    box-shadow: var(--cd-shadow);
+  }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 0.92rem; line-height: 1.6; }
+  th, td { padding: 12px 14px; border-bottom: 1px solid var(--cd-border); text-align: left; vertical-align: top; }
+  tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
+  .compare__label {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--cd-surface-alt);
+    width: 96px;
+    min-width: 96px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .compare__head { vertical-align: bottom; min-width: 170px; }
+  .compare__head.is-top { background: var(--cd-primary-soft); }
+  .compare__badges { display: flex; gap: 4px; flex-wrap: wrap; min-height: 1.6em; margin-bottom: 4px; }
+  .badge { font-size: 0.72rem; padding: 0.1em 0.6em; border-radius: 999px; color: #fff; font-weight: 700; }
+  .badge--top { background: var(--cd-primary); }
+  .badge--value { background: var(--cd-accent); }
+  .compare__brand { display: block; font-size: 0.78rem; color: var(--cd-text-muted); font-weight: 400; }
+  .compare__name { display: block; font-family: var(--cd-font-display); font-size: 1rem; }
+  .compare__price { font-weight: 700; color: var(--cd-primary-dark); font-size: 1.05rem; }
+  .list { margin: 0; padding: 0; list-style: none; }
+  .list li { padding-left: 1.3em; position: relative; }
+  .list li::before { position: absolute; left: 0; font-weight: 700; }
+  .list--pro li::before { content: '✓'; color: var(--cd-accent); }
+  .list--con li::before { content: '✕'; color: var(--cd-danger); }
+  .compare__note { font-size: 0.8rem; color: var(--cd-text-muted); margin: 8px 0 0; }
+</style>
