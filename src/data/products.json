@@ -209,7 +209,8 @@
     ],
     "merchant": "Yahoo購物中心",
     "affiliateUrl": "https://tw.buy.yahoo.com/search/product?p=%E8%87%AA%E5%8B%95%20%E9%9B%B7%E5%B0%84%20%E9%80%97%E8%B2%93",
-    "reviewType": "research"
+    "reviewType": "research",
+    "network": "ichannels"
   },
   {
     "id": "toy-puzzle-feeder",
@@ -262,7 +263,8 @@
     ],
     "merchant": "Yahoo購物中心",
     "affiliateUrl": "https://tw.buy.yahoo.com/search/product?p=%E5%AF%A6%E6%9C%A8%20%E8%B2%93%E8%B7%B3%E5%8F%B0",
-    "reviewType": "research"
+    "reviewType": "research",
+    "network": "ichannels"
   },
   {
     "id": "furniture-scratcher-wave",
