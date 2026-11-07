@@ -125,4 +125,12 @@ const jsonLd = [
   }
   .prose :global(blockquote p) { margin: 0; }
   .prose :global(li) { margin: 0.3em 0; }
+  .prose :global(table) {
+    display: block; max-width: 100%; overflow-x: auto;
+    border-collapse: collapse; margin: 1em 0; font-size: 0.95rem; line-height: 1.6;
+  }
+  .prose :global(th), .prose :global(td) { padding: 8px 14px; border: 1px solid var(--cd-border); text-align: left; vertical-align: top; }
+  .prose :global(thead th) { background: var(--cd-primary-soft); white-space: nowrap; }
+  .prose :global(tbody tr:nth-child(even)) { background: var(--cd-surface-alt); }
+  .prose :global(h3) { margin-top: 1.6em; }
 </style>

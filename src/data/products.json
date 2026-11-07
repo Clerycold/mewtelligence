@@ -4,7 +4,7 @@
     "name": "Bistro Cat 特級銀貓罐 80g（小銀罐）",
     "brand": "惜時 SEEDS（聖萊西）",
     "category": "food",
-    "summary": "俗稱「小銀罐」的 80g 副食罐，作者家三隻貓都愛吃，已經吃了兩年多。副食罐不是完整營養，需搭配主食。",
+    "summary": "俗稱「小銀罐」的平價副食罐，白身鮪魚搭配雞肉、蝦肉、起司等多種配料。作者家三隻貓都愛吃，已經吃了兩年多。屬於副食罐，不是完整營養，需搭配主食。",
     "specs": {
       "calories": "43.7 kcal",
       "protein": "12.0% 以上",
@@ -12,18 +12,27 @@
       "fiber": "3.0% 以下",
       "ash": "3.0% 以下",
       "moisture": "85.0% 以下",
-      "weight": "80 g"
+      "weight": "80 g",
+      "origin": "泰國"
     },
     "pros": [
       "適口性好，三隻貓都愛吃",
-      "長期吃了兩年多"
+      "口味多，可以輪流換",
+      "水分高，可當額外水分來源",
+      "80g 小罐一餐剛好，不易剩"
     ],
-    "cons": [],
+    "cons": [
+      "副食罐，不能取代完整營養的主食",
+      "公開資料未標示牛磺酸、鈣磷比",
+      "網路上也有飼主反映貓咪不接受部分口味"
+    ],
     "merchant": "蝦皮",
     "affiliateUrl": "https://s.shopee.tw/6fifVV8mI9",
     "reviewType": "hands-on",
     "usageNote": "三隻貓都愛吃，已經吃了兩年多。",
     "subtype": "topper",
-    "usageDuration": "兩年多"
+    "usageDuration": "兩年多",
+    "ageGroup": "全齡貓（依包裝標示）",
+    "photo": "/images/bistro.jpg"
   }
 ]

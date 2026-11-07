@@ -81,7 +81,7 @@ const per100 = pricePer100g(product);
   .pcard { display: flex; flex-direction: column; overflow: hidden; }
   .pcard--handson { border-color: var(--cd-accent); box-shadow: 0 0 0 1px var(--cd-accent), var(--cd-shadow); }
   .pcard__media { display: block; text-decoration: none; aspect-ratio: 16 / 9; background: linear-gradient(135deg, var(--cd-primary-soft), var(--cd-surface-alt)); }
-  .pcard__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pcard__media img { width: 100%; height: 100%; object-fit: contain; display: block; background: #fff; }
   .pcard__thumb {
     display: grid; place-items: center; height: 100%;
     color: var(--cd-primary); font-family: var(--cd-font-display); font-size: 3.2rem; font-weight: 900;

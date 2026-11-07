@@ -30,7 +30,11 @@ for (const [k, v] of Object.entries(product.specs)) {
   if (!(k in category.specLabels)) specRows.push([k, v]);
 }
 
-const articles = (await getPublishedArticles()).filter((a) => a.data.category === category.slug).slice(0, 3);
+// 有提到這個商品的文章排前面，其次才是同分類文章
+const articles = (await getPublishedArticles())
+  .filter((a) => a.data.category === category.slug)
+  .sort((a, b) => Number(b.data.products.includes(product.id)) - Number(a.data.products.includes(product.id)))
+  .slice(0, 3);
 
 const title = `${product.brand} ${product.name}${handsOn ? '｜實際使用心得' : '｜規格整理'}`;
 const description = handsOn && product.usageNote
@@ -151,7 +155,7 @@ const jsonLd = {
     aspect-ratio: 1; border-radius: var(--cd-radius); overflow: hidden;
     background: linear-gradient(135deg, var(--cd-primary-soft), var(--cd-surface-alt));
   }
-  .phead__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .phead__media img { width: 100%; height: 100%; object-fit: contain; display: block; background: #fff; }
   .phead__thumb {
     display: grid; place-items: center; height: 100%;
     color: var(--cd-primary); font-family: var(--cd-font-display); font-size: 5rem; font-weight: 900;
