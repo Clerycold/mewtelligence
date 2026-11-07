@@ -27,8 +27,11 @@ for (const p of items) {
 }
 
 // 徽章：評分最高 = 編輯推薦；價格最低 = 最划算（只有 2 個以上商品才標）
-const topRated = items.length > 1 ? items.reduce((a, b) => (b.rating > a.rating ? b : a)) : undefined;
-const cheapest = items.length > 1 ? items.reduce((a, b) => (b.price < a.price ? b : a)) : undefined;
+// 沒填評分或價格的商品不參與比較
+const rated = items.filter((p) => p.rating != null);
+const priced = items.filter((p) => p.price != null);
+const topRated = rated.length > 1 ? rated.reduce((a, b) => (b.rating! > a.rating! ? b : a)) : undefined;
+const cheapest = priced.length > 1 ? priced.reduce((a, b) => (b.price! < a.price! ? b : a)) : undefined;
 const badgesFor = (p: Product) => [
   p === topRated && { text: '編輯推薦', cls: 'top' },
   p === cheapest && { text: '最划算', cls: 'value' },
@@ -68,7 +71,7 @@ const hasUsage = items.some((p) => p.usageNote);
           </tr>
           <tr>
             <th scope="row" class="compare__label">評分</th>
-            {items.map((p) => <td><Rating value={p.rating} /></td>)}
+            {items.map((p) => <td>{p.rating != null ? <Rating value={p.rating} /> : '—'}</td>)}
           </tr>
           {[...specRows].map(([key, label]) => (
             <tr>
@@ -85,13 +88,13 @@ const hasUsage = items.some((p) => p.usageNote);
           <tr>
             <th scope="row" class="compare__label">優點</th>
             {items.map((p) => (
-              <td><ul class="list list--pro">{p.pros.map((x) => <li>{x}</li>)}</ul></td>
+              <td>{p.pros.length ? <ul class="list list--pro">{p.pros.map((x) => <li>{x}</li>)}</ul> : '—'}</td>
             ))}
           </tr>
           <tr>
             <th scope="row" class="compare__label">缺點</th>
             {items.map((p) => (
-              <td><ul class="list list--con">{p.cons.map((x) => <li>{x}</li>)}</ul></td>
+              <td>{p.cons.length ? <ul class="list list--con">{p.cons.map((x) => <li>{x}</li>)}</ul> : '—'}</td>
             ))}
           </tr>
           <tr>

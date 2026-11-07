@@ -1,5 +1,21 @@
 [
   {
+    "id": "food-seeds-bistro-silver",
+    "name": "Bistro Cat 特級銀貓罐 80g（小銀罐）",
+    "brand": "惜時 SEEDS（聖萊西）",
+    "category": "food",
+    "summary": "俗稱「小銀罐」的 80g 副食罐，作者家的貓日常有在吃。副食罐不是完整營養，需搭配主食。",
+    "specs": {
+      "weight": "80 g"
+    },
+    "pros": [],
+    "cons": [],
+    "merchant": "蝦皮",
+    "affiliateUrl": "https://s.shopee.tw/6fifVV8mI9",
+    "reviewType": "hands-on",
+    "usageNote": "作者家的貓日常有在吃。"
+  },
+  {
     "id": "food-salmon-gf",
     "name": "無穀鮭魚成貓乾糧",
     "brand": "範例品牌 A",

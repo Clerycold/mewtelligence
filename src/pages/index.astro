@@ -6,7 +6,10 @@ import { categories, products } from '../lib/data';
 import { getPublishedArticles } from '../lib/articles';
 
 const articles = await getPublishedArticles();
-const featured = [...products].sort((a, b) => b.rating - a.rating).slice(0, 3);
+// 實際使用過的商品優先，其次依評分
+const featured = [...products]
+  .sort((a, b) => Number(b.reviewType === 'hands-on') - Number(a.reviewType === 'hands-on') || (b.rating ?? 0) - (a.rating ?? 0))
+  .slice(0, 3);
 
 const jsonLd = {
   '@type': 'WebSite',

@@ -14,8 +14,10 @@ export interface Product {
   name: string;
   brand: string;
   category: string;
-  price: number;
-  rating: number;
+  /** 參考價格（新台幣）；不填則顯示「見商店」 */
+  price?: number;
+  /** 1～5 分；不填則不顯示評分，也不參與「編輯推薦」 */
+  rating?: number;
   summary: string;
   specs: Record<string, string>;
   pros: string[];
@@ -90,4 +92,4 @@ export function goUrl(product: Product): string {
   return `/go/${product.id}/`;
 }
 
-export const formatPrice = (n: number) => `NT$${n.toLocaleString('zh-TW')}`;
+export const formatPrice = (n?: number) => (n == null ? '見商店' : `NT$${n.toLocaleString('zh-TW')}`);

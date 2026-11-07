@@ -13,7 +13,7 @@ const { product } = Astro.props;
   <div class="product-card__body">
     <p class="product-card__brand">{product.brand} <ReviewBadge type={product.reviewType} /></p>
     <h3 class="product-card__name">{product.name}</h3>
-    <Rating value={product.rating} />
+    {product.rating != null && <Rating value={product.rating} />}
     <p class="product-card__summary">{product.summary}</p>
     <div class="product-card__foot">
       <strong class="product-card__price">{formatPrice(product.price)}</strong>
