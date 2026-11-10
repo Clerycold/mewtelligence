@@ -28,16 +28,20 @@ for (const p of items) {
 
 // 徽章：評分最高 = 編輯推薦；價格最低 = 最划算（只有 2 個以上商品才標）
 // 推薦標籤只頒給「實際使用」的商品，資料整理的商品不參與
-// 編輯推薦：實際使用中評分最高的（沒填評分視為 0）；最划算：實際使用且有填價格中最便宜的
+// 編輯推薦：實際使用且有填評分中最高的；最划算：實際使用且有填價格中最便宜的
+// 都沒填就不頒，避免第一個商品被預設成「編輯推薦」
 const handsOn = items.length > 1 ? items.filter((p) => p.reviewType === 'hands-on') : [];
 const priced = handsOn.filter((p) => p.price != null);
-const topRated = handsOn.length ? handsOn.reduce((a, b) => ((b.rating ?? 0) > (a.rating ?? 0) ? b : a)) : undefined;
+const rated = handsOn.filter((p) => p.rating != null);
+const topRated = rated.length ? rated.reduce((a, b) => (b.rating! > a.rating! ? b : a)) : undefined;
 const cheapest = priced.length ? priced.reduce((a, b) => (b.price! < a.price! ? b : a)) : undefined;
 const badgesFor = (p: Product) => [
   p === topRated && { text: '編輯推薦', cls: 'top' },
   p === cheapest && { text: '最划算', cls: 'value' },
 ].filter(Boolean) as { text: string; cls: string }[];
 const hasUsage = items.some((p) => p.usageNote);
+const hasPrice = items.some((p) => p.price != null);
+const hasRating = items.some((p) => p.rating != null);
 ---
 {items.length > 0 && (
   <section class="compare" aria-label={title}>
@@ -61,7 +65,7 @@ const hasUsage = items.some((p) => p.usageNote);
           </tr>
         </thead>
         <tbody>
-          <tr>
+          {hasPrice && <tr>
             <th scope="row" class="compare__label">參考價格</th>
             {items.map((p) => (
               <td class="compare__price">
@@ -69,11 +73,13 @@ const hasUsage = items.some((p) => p.usageNote);
                 {p.priceCheckedAt && <small>查於 {formatDate(p.priceCheckedAt)}</small>}
               </td>
             ))}
-          </tr>
-          <tr>
-            <th scope="row" class="compare__label">評分</th>
-            {items.map((p) => <td>{p.rating != null ? <Rating value={p.rating} /> : '—'}</td>)}
-          </tr>
+          </tr>}
+          {hasRating && (
+            <tr>
+              <th scope="row" class="compare__label">評分</th>
+              {items.map((p) => <td>{p.rating != null ? <Rating value={p.rating} /> : '—'}</td>)}
+            </tr>
+          )}
           {[...specRows].map(([key, label]) => (
             <tr>
               <th scope="row" class="compare__label">{label}</th>
