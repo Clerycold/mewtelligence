@@ -14,7 +14,9 @@ export function getStaticPaths() {
 interface Props { category: Category }
 const { category } = Astro.props;
 
-const articles = (await getPublishedArticles()).filter((a) => a.data.category === category.slug);
+const articles = (await getPublishedArticles())
+  .filter((a) => a.data.category === category.slug)
+  .sort((a, b) => Number(b.data.pinned) - Number(a.data.pinned));
 const items = getProductsByCategory(category.slug);
 
 const jsonLd = {
@@ -25,7 +27,7 @@ const jsonLd = {
   ],
 };
 ---
-<BaseLayout title={`${category.name}推薦與選購指南`} description={category.heroSubtitle ?? category.description} jsonLd={jsonLd}>
+<BaseLayout title={category.kind === 'guide' ? `${category.name}介紹` : `${category.name}推薦與選購指南`} description={category.heroSubtitle ?? category.description} jsonLd={jsonLd}>
   <CategoryHero
     title={category.heroTitle ?? `${category.name}推薦與比較`}
     subtitle={category.heroSubtitle ?? category.description}
@@ -33,13 +35,16 @@ const jsonLd = {
   />
 
   <div class="container">
-    <SubtypeEntries category={category} products={items} />
-
-    <ProductList category={category} products={items} title={`${category.name}推薦`} />
+    {category.kind !== 'guide' && (
+      <>
+        <SubtypeEntries category={category} products={items} />
+        <ProductList category={category} products={items} title={`${category.name}推薦`} />
+      </>
+    )}
 
     {articles.length > 0 && (
       <section aria-labelledby="articles-heading">
-        <h2 id="articles-heading">{category.name}選購文章</h2>
+        <h2 id="articles-heading">{category.kind === 'guide' ? `${category.name}文章` : `${category.name}選購文章`}</h2>
         <div class="grid">{articles.map((a) => <ArticleCard article={a} />)}</div>
       </section>
     )}

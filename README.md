@@ -72,13 +72,14 @@ npm run deploy   # build 並部署到 Cloudflare Pages（需先 wrangler login�
 ---
 title: 文章標題
 description: 120 字內的摘要（會用在 Google 搜尋結果）
-category: litter          # food / litter / toys / furniture
+category: litter          # food / litter / toys / furniture / breeds
 pubDate: 2026-11-07
 products: [litter-tofu-original, litter-new-one]   # 文末比較表
 author: tenyear           # 對應 authors.json，可省略（預設 tenyear）
 sources:                  # 參考資料，可省略
   - title: 資料標題
     url: https://...
+pinned: false             # true＝在分類頁置頂
 draft: false
 ---
 ```

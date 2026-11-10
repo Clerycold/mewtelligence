@@ -21,6 +21,8 @@ export interface Category {
   subtypes?: Subtype[];
   /** 商品卡片上顯示的重點規格 key（依序） */
   cardSpecs?: string[];
+  /** "guide"＝純知識分類（例如貓咪品種），分類頁不顯示商品區 */
+  kind?: 'guide';
 }
 
 export interface Product {
