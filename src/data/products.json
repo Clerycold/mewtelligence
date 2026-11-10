@@ -40,8 +40,9 @@
     "name": "CIAO 靜岡縣國產燒餐包",
     "brand": "CIAO（INABA）",
     "category": "food",
-    "summary": "日本靜岡縣製造的 CIAO 燒魚餐包，有多種口味。作者家的貓非常愛吃：味道不腥、一包份量剛好，愛到都想把它當主食了。",
+    "summary": "日本靜岡縣製造的 CIAO 燒餐包，一包 50g，有燒鰹魚、燒雞柳等多種口味。作者家的貓非常愛吃：味道不腥、一包份量剛好，愛到都想把它當主食了。",
     "specs": {
+      "weight": "50 g",
       "origin": "日本靜岡縣"
     },
     "pros": [
@@ -55,6 +56,7 @@
     "affiliateUrl": "https://s.shopee.tw/80E85H88Zu",
     "reviewType": "hands-on",
     "usageNote": "口味不腥，量也剛好，我家貓愛到都想把它當主食了。",
-    "subtype": "topper"
+    "subtype": "topper",
+    "photo": "/images/ciao.webp"
   }
 ]
