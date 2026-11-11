@@ -11,6 +11,11 @@ pubDate: 2026-11-10
 
 ## 米克斯是什麼？
 
+<figure>
+  <img src="/images/mixed.webp" alt="棕色虎斑白肚的米克斯貓坐在地毯上" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>米克斯（棕虎斑）（示意圖）</figcaption>
+</figure>
+
 「米克斯」是英文 mix 的音譯，指的是沒有特定品種血統的混種貓。台灣街頭、收容所和中途之家裡的貓，大多是米克斯，也常被叫做「台灣土貓」。
 
 ## 常見花色

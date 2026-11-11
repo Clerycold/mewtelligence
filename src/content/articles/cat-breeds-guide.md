@@ -30,6 +30,11 @@ pinned: true
 
 ## 1. 米克斯（混種貓）
 
+<figure>
+  <img src="/images/mixed.webp" alt="棕色虎斑白肚的米克斯貓坐在地毯上" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>米克斯（棕虎斑）（示意圖）</figcaption>
+</figure>
+
 米克斯就是沒有特定品種血統的貓，台灣街頭和收容所裡大多是米克斯。常見的花色有橘貓、虎斑、三花、玳瑁、賓士（黑白）等。
 
 - **個性：** 個體差異很大，有超黏人的，也有很獨立的。認養成貓的好處是個性已經定型，看得出來。
@@ -40,6 +45,11 @@ pinned: true
 
 ## 2. 英國短毛貓（英短）
 
+<figure>
+  <img src="/images/british-shorthair.webp" alt="灰藍色的英國短毛貓，圓臉、橘色眼睛" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>英國短毛貓（藍貓）（示意圖）</figcaption>
+</figure>
+
 圓臉、圓眼睛、毛又短又密，最經典的是灰藍色的「藍貓」，也有金漸層、銀漸層等毛色。
 
 - **個性：** 穩定、比較獨立，通常不太喜歡被一直抱。
@@ -47,6 +57,11 @@ pinned: true
 - **健康注意：** 有肥厚性心肌病（HCM）的風險，建議定期做心臟超音波檢查。
 
 ## 3. 美國短毛貓（美短）
+
+<figure>
+  <img src="/images/american-shorthair.webp" alt="銀底黑色虎斑的美國短毛貓" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>美國短毛貓（銀虎斑）（示意圖）</figcaption>
+</figure>
 
 最經典的是銀底黑色虎斑，身體結實，肌肉發達。
 
@@ -56,6 +71,11 @@ pinned: true
 
 ## 4. 布偶貓
 
+<figure>
+  <img src="/images/ragdoll.webp" alt="白色半長毛、臉和耳朵深色的藍眼布偶貓" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>布偶貓（示意圖）</figcaption>
+</figure>
+
 藍眼睛、半長毛，臉、耳朵、尾巴顏色較深（重點色）。名字的由來是被抱起來時常常全身放鬆，像布偶一樣。
 
 - **個性：** 溫和、親人，喜歡跟著主人。
@@ -63,6 +83,11 @@ pinned: true
 - **健康注意：** 布偶貓有已知與肥厚性心肌病相關的基因突變，購買時可以詢問父母貓的基因檢測。
 
 ## 5. 緬因貓
+
+<figure>
+  <img src="/images/maine-coon.webp" alt="棕色虎斑長毛的緬因貓，耳朵尖端有簇毛" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>緬因貓（示意圖）</figcaption>
+</figure>
 
 貓界的大型品種，公貓常見超過 7 公斤。耳朵尖端有簇毛，尾巴蓬鬆。
 
@@ -72,8 +97,10 @@ pinned: true
 
 ## 6. 蘇格蘭摺耳貓
 
-![米色白色的蘇格蘭摺耳貓坐在窗邊，耳朵往前摺](/images/fold.webp)
-*蘇格蘭摺耳貓（示意圖）*
+<figure>
+  <img src="/images/fold.webp" alt="米色白色的蘇格蘭摺耳貓坐在窗邊，耳朵往前摺" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>蘇格蘭摺耳貓（示意圖）</figcaption>
+</figure>
 
 耳朵往前摺、臉圓圓的，外型非常可愛，也是爭議最大的品種之一。
 
@@ -84,8 +111,10 @@ pinned: true
 
 ## 7. 曼赤肯（短腿貓）
 
-![銀色虎斑的曼赤肯短腿貓坐在地毯上](/images/short-leg.webp)
-*曼赤肯（示意圖）*
+<figure>
+  <img src="/images/short-leg.webp" alt="銀色虎斑的曼赤肯短腿貓坐在地毯上" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>曼赤肯（示意圖）</figcaption>
+</figure>
 
 腿特別短，跑起來很有特色。
 
@@ -94,8 +123,10 @@ pinned: true
 
 ## 8. 波斯貓
 
-![左邊是長毛的波斯貓，右邊是短毛的異國短毛貓，兩隻都是扁臉](/images/flat-face.webp)
-*左：波斯貓；右：異國短毛貓（示意圖）*
+<figure>
+  <img src="/images/flat-face.webp" alt="左邊是長毛的波斯貓，右邊是短毛的異國短毛貓，兩隻都是扁臉" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>左：波斯貓；右：異國短毛貓（示意圖）</figcaption>
+</figure>
 
 扁臉、長毛，氣質慵懶優雅。
 
@@ -105,6 +136,11 @@ pinned: true
 
 ## 9. 異國短毛貓（加菲貓）
 
+<figure>
+  <img src="/images/exotic-shorthair.webp" alt="橘色扁臉的異國短毛貓" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>異國短毛貓（示意圖）</figcaption>
+</figure>
+
 可以想成「短毛版的波斯貓」，扁臉、圓滾滾。
 
 - **個性：** 安靜、親人，比波斯貓稍微活潑一點。
@@ -113,6 +149,11 @@ pinned: true
 
 ## 10. 俄羅斯藍貓
 
+<figure>
+  <img src="/images/russian-blue.webp" alt="藍灰色短毛、綠眼睛的俄羅斯藍貓" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>俄羅斯藍貓（示意圖）</figcaption>
+</figure>
+
 藍灰色的雙層短毛、綠眼睛，身形修長。
 
 - **個性：** 對家人很親，但對陌生人比較害羞；喜歡規律的生活。
@@ -120,6 +161,11 @@ pinned: true
 - **健康注意：** 整體算是體質不錯的品種，主要注意體重。
 
 ## 11. 暹羅貓
+
+<figure>
+  <img src="/images/siamese.webp" alt="米白色身體、臉耳腳尾深色的藍眼暹羅貓" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>暹羅貓（示意圖）</figcaption>
+</figure>
 
 身形修長、藍眼睛，臉、耳朵、腳和尾巴是深色的重點色。
 

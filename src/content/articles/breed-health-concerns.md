@@ -15,8 +15,10 @@ pubDate: 2026-11-10
 
 ## 1. 摺耳貓（蘇格蘭摺耳貓）
 
-![米色白色的蘇格蘭摺耳貓坐在窗邊，耳朵往前摺](/images/fold.webp)
-*蘇格蘭摺耳貓（示意圖）*
+<figure>
+  <img src="/images/fold.webp" alt="米色白色的蘇格蘭摺耳貓坐在窗邊，耳朵往前摺" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>蘇格蘭摺耳貓（示意圖）</figcaption>
+</figure>
 
 **問題是什麼？**
 讓耳朵摺起來的基因，會讓全身的軟骨發育異常，稱為「骨骼軟骨發育不良」。這不是少數個體才有的問題，而是**每一隻摺耳貓都帶有**，差別只在嚴重程度。
@@ -36,8 +38,10 @@ pubDate: 2026-11-10
 
 ## 2. 扁臉貓（波斯貓、異國短毛貓）
 
-![左邊是長毛的波斯貓，右邊是短毛的異國短毛貓，兩隻都是扁臉](/images/flat-face.webp)
-*左：波斯貓；右：異國短毛貓（示意圖）*
+<figure>
+  <img src="/images/flat-face.webp" alt="左邊是長毛的波斯貓，右邊是短毛的異國短毛貓，兩隻都是扁臉" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>左：波斯貓；右：異國短毛貓（示意圖）</figcaption>
+</figure>
 
 **問題是什麼？**
 扁臉的骨骼結構，會讓鼻孔變小、鼻腔變短，影響呼吸。這類情況稱為「短頭症」。
@@ -56,8 +60,10 @@ pubDate: 2026-11-10
 
 ## 3. 短腿貓（曼赤肯）
 
-![銀色虎斑的曼赤肯短腿貓坐在地毯上](/images/short-leg.webp)
-*曼赤肯（示意圖）*
+<figure>
+  <img src="/images/short-leg.webp" alt="銀色虎斑的曼赤肯短腿貓坐在地毯上" width="1200" height="655" loading="lazy" decoding="async">
+  <figcaption>曼赤肯（示意圖）</figcaption>
+</figure>
 
 **問題是什麼？**
 曼赤肯的短腿，來自影響長骨生長的基因突變。
